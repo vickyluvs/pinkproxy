@@ -50,3 +50,81 @@
   list.addEventListener("change", update);
   update();
 })();
+
+// "Email me the checklist" signup.
+// Sends the visitor's name, email and score to the Google Apps Script web app,
+// which saves them to the Leads sheet and emails the PDF (see apps-script/SETUP.md).
+(function () {
+  // Paste your Apps Script web app URL here (ends in /exec).
+  var SIGNUP_ENDPOINT = "";
+
+  var form = document.getElementById("pdf-signup");
+  if (!form) return;
+  var statusEl = document.getElementById("pdf-status");
+  var btn = form.querySelector(".submit");
+  var emailInput = document.getElementById("ps-email");
+
+  function show(kind, html) {
+    statusEl.className = "form-status " + kind;
+    statusEl.innerHTML = html;
+    statusEl.hidden = false;
+  }
+
+  function fieldError(msg) {
+    var field = emailInput.closest(".field");
+    var err = field.querySelector(".err");
+    field.classList.toggle("invalid", !!msg);
+    if (msg) {
+      if (!err) { err = document.createElement("span"); err.className = "err"; field.appendChild(err); }
+      err.textContent = msg;
+      emailInput.setAttribute("aria-invalid", "true");
+    } else {
+      if (err) err.remove();
+      emailInput.removeAttribute("aria-invalid");
+    }
+  }
+  emailInput.addEventListener("input", function () { fieldError(""); });
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    statusEl.hidden = true;
+    var email = emailInput.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      fieldError("Please enter a valid email address.");
+      emailInput.focus();
+      return;
+    }
+    if (!SIGNUP_ENDPOINT) {
+      show("fail", "The checklist email isn't connected yet. Please write to <b>info@thepinkproxy.com</b> and we'll send it to you.");
+      return;
+    }
+
+    var scoreEl = document.getElementById("cl-score");
+    var data = {
+      first_name: form.first_name.value.trim(),
+      email: email,
+      score: scoreEl ? scoreEl.textContent : "",
+      company_website: form.company_website.value,
+      page: location.pathname
+    };
+
+    btn.disabled = true;
+    btn.textContent = "Sending…";
+
+    // Plain-text body keeps this a "simple" request that Apps Script accepts.
+    fetch(SIGNUP_ENDPOINT, { method: "POST", body: JSON.stringify(data) })
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (!res || !res.success) throw new Error(res && res.message);
+        form.querySelectorAll(".pdf-fields, .submit, .pdf-consent").forEach(function (el) { el.hidden = true; });
+        show("ok", "<b>Check your inbox.</b> The checklist is on its way to " + email.replace(/[<>&]/g, "") + ". If you don't see it in a few minutes, look in your spam folder.");
+      })
+      .catch(function () {
+        show("fail", "Something went wrong and the checklist wasn't sent. Please try again, or email <b>info@thepinkproxy.com</b>.");
+      })
+      .finally(function () {
+        btn.disabled = false;
+        btn.textContent = "Email Me the Checklist";
+      });
+  });
+})();

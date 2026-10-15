@@ -140,7 +140,23 @@ nav.main a.nav-cta{background:var(--copper);color:var(--navy);margin-left:6px}
 .cl-list input{width:18px;height:18px;margin-top:3px;accent-color:var(--navy)}
 .cl-list small{display:block;color:var(--muted);font-size:13px}
 .cl-result{margin-top:16px;padding:14px 16px;border-radius:10px;background:var(--navy);color:var(--on-navy);font-size:14px}
+.checklist-intro{display:grid;gap:28px;min-width:0}
+.pdf-signup{background:var(--navy);color:var(--on-navy);border-radius:18px;padding:26px;display:grid;gap:16px}
+.pdf-signup-head{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start}
+.pdf-ic{width:44px;height:44px;padding:10px;border-radius:12px;background:rgba(242,167,187,.14);color:var(--pink)}
+.pdf-signup h3{color:var(--white);font-size:18px;font-weight:800}
+.pdf-signup-head p{font-size:14px;margin-top:4px}
+.pdf-fields{display:grid;grid-template-columns:1fr 1.4fr;gap:12px}
+.pdf-signup .field label{color:var(--white)}
+.pdf-signup .field input{border-color:transparent}
+.pdf-signup .field .err{color:var(--pink)}
+.pdf-signup .field.invalid input{border-color:var(--pink)}
+.pdf-signup .submit{width:100%}
+.pdf-signup .submit[disabled]{opacity:.65;cursor:wait;transform:none}
+.pdf-consent{font-size:12px;color:var(--on-navy);text-align:center;margin-top:-6px}
+.pdf-signup .form-status.ok{background:rgba(242,167,187,.12);color:var(--white);border:1px solid rgba(242,167,187,.35)}
 @media (max-width:860px){.checklist{grid-template-columns:1fr}}
+@media (max-width:520px){.pdf-fields{grid-template-columns:1fr}}
 
 /* Callout banner */
 .callout{background:var(--navy);color:var(--on-navy);border-radius:22px;padding:clamp(32px,5vw,56px);display:grid;grid-template-columns:1.4fr auto;gap:32px;align-items:center;position:relative;overflow:hidden}

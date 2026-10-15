@@ -147,11 +147,35 @@
 
   <section class="band blush" id="checklist">
     <div class="wrap checklist">
+      <div class="checklist-intro">
       <div class="section-head" style="margin-bottom:0">
         <p class="eyebrow">Free 5-minute checklist</p>
         <h2 class="h2">How protected is your business right now?</h2>
-        <p class="lede">Tick off what's already true for your team. You'll get a quick read on where you stand. Your answers stay in your browser.</p>
-        <div><a class="btn btn-navy" href="#book">Want the full PDF version? Request it</a></div>
+        <p class="lede">Tick off what's already true for your team and get a quick read on where you stand. Your answers stay in your browser.</p>
+      </div>
+      <form class="pdf-signup" id="pdf-signup" novalidate>
+        <div class="pdf-signup-head">
+          <svg class="pdf-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 3v5h5M10 13l2 2 3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div>
+            <h3>Get the printable PDF</h3>
+            <p>All 10 checks, why each one matters, and a quick fix for every gap. We'll email it to you along with your score.</p>
+          </div>
+        </div>
+        <input type="text" name="company_website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="pdf-fields">
+          <div class="field">
+            <label for="ps-name">First name</label>
+            <input id="ps-name" name="first_name" type="text" autocomplete="given-name">
+          </div>
+          <div class="field">
+            <label for="ps-email">Email</label>
+            <input id="ps-email" name="email" type="email" autocomplete="email" required>
+          </div>
+        </div>
+        <button class="btn btn-primary submit" type="submit">Email Me the Checklist</button>
+        <p class="pdf-consent">You'll also get occasional security tips from The Pink Proxy. Unsubscribe anytime.</p>
+        <div class="form-status" id="pdf-status" role="status" aria-live="polite" hidden></div>
+      </form>
       </div>
       <div class="card">
         <div class="cl-progress"><span>Your score</span><b><span id="cl-score">0</span> / 10</b></div>
