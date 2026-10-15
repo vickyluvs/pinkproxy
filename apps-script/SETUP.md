@@ -1,9 +1,18 @@
-# Checklist email signup: setup
+# Website automations: setup
 
-When a visitor requests the checklist PDF on the home page, this script:
+One Google Apps Script handles two website forms.
+
+**Checklist signup** (home page). When a visitor requests the PDF, the script:
 1. Adds them to a **Leads** tab in a Google Sheet (date, first name, email, score)
 2. Emails them the PDF from **info@thepinkproxy.com**
 3. Sends you a short "new lead" notification
+
+**Audit requests** (contact form on every page). When a client submits the form, the script:
+1. Adds it to an **Audit Requests** tab
+2. Emails the client a personalized reply from **consult@thepinkproxy.com** with their package, price, timeline and your booking link
+3. Sends the full request to consult@
+
+Both info@ and consult@ must be listed under **Gmail → Settings → Accounts → Send mail as** on the account that runs the script.
 
 It runs free on your Google Workspace account. Setup takes about 5 minutes.
 
@@ -28,6 +37,9 @@ It runs free on your Google Workspace account. Setup takes about 5 minutes.
 3. Set **Execute as: Me** and **Who has access: Anyone**.
 4. Click **Deploy** and copy the **Web app URL** (it ends in `/exec`).
 5. Paste that URL into `js/checklist.js` as `SIGNUP_ENDPOINT`, then commit and push.
+
+## Testing the audit reply
+Choose **testAuditReply** and click **Run**. You'll get two sample replies: one for a client who picked a package and one for "Not sure yet".
 
 ## Changing the script later
 After editing the code, use **Deploy → Manage deployments → Edit (pencil) → Version: New version → Deploy**. This keeps the same URL, so the website doesn't need to change.

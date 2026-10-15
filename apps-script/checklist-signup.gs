@@ -2,13 +2,20 @@
 // ^ Limits this script to the one Google Sheet it is attached to (not all your spreadsheets).
 
 /**
- * The Pink Proxy: 5-Minute Checklist signup
+ * The Pink Proxy: website automations
  * ------------------------------------------------------------
  * Runs in Google Apps Script, attached to a Google Sheet.
- * When someone requests the checklist on thepinkproxy.com it:
+ *
+ * Checklist signup (home page):
  *   1. Adds them as a row in the "Leads" tab of this Sheet
  *   2. Emails them the checklist PDF from info@thepinkproxy.com
  *   3. Sends you a short "new lead" notification
+ *
+ * Audit request (contact form on every page):
+ *   1. Adds the request to the "Audit Requests" tab
+ *   2. Emails the client a personalized reply from consult@thepinkproxy.com
+ *      with their package details and your booking link
+ *   3. Sends you the full request
  *
  * Setup steps are in apps-script/SETUP.md in the website repo.
  */
@@ -35,7 +42,47 @@ const CONFIG = {
   MAILING_ADDRESS: 'The Pink Proxy LLC · [YOUR MAILING ADDRESS] · Maryland, USA',
 
   SHEET_NAME: 'Leads',
-  BOOKING_URL: 'https://thepinkproxy.com/#book'
+
+  // ---- Audit requests ----
+  // Address audit replies come from (your account or a "Send mail as" alias).
+  CONSULT_EMAIL: 'consult@thepinkproxy.com',
+  // Where full audit requests are sent. Leave '' to turn off.
+  AUDIT_NOTIFY_EMAIL: 'consult@thepinkproxy.com',
+  AUDIT_SHEET_NAME: 'Audit Requests',
+
+  // Your Google Calendar booking page for the free discovery call.
+  BOOKING_URL: 'https://calendar.app.google/6q6vAAoAaH3e21nY7',
+
+  SIGNATURE_NAME: 'Victoria Smith',
+  SIGNATURE_TITLE: 'Founder & Principal Consultant'
+};
+
+/** Package details used in the automatic audit reply. Keep in sync with the Services page. */
+const PACKAGES = {
+  'Security Jumpstart': {
+    price: '$1,450', timeline: '3–5 days',
+    items: ['A remote Cyber Hygiene Audit across all five pillars',
+            'Multi-factor sign-in and a business password manager for your team',
+            'A prioritized, plain-English findings report and walkthrough call']
+  },
+  'Digital Shield': {
+    price: '$2,850', timeline: 'about 2 weeks',
+    items: ['Everything in the Security Jumpstart',
+            'A custom offboarding runbook and a role-based access map',
+            'Email spoofing protection (DMARC enforcement) and device hardening']
+  },
+  'Pink Proxy Concierge': {
+    price: '$4,500', timeline: 'about 3 weeks',
+    items: ['Everything in the Digital Shield',
+            'Written security policies and a tabletop exercise with your team',
+            'A NIST CSF 2.0 profile report you can share with insurers and clients']
+  },
+  'Quarterly Maintenance': {
+    price: '$450/month', timeline: 'ongoing',
+    items: ['A quarterly access review and cleanup',
+            'Help whenever someone joins or leaves your team',
+            'Email and backup spot-checks, plus a quarterly check-in call']
+  }
 };
 
 /** Receives the form submission from the website. */
@@ -44,6 +91,7 @@ function doPost(e) {
   try {
     lock.waitLock(20000);
     const data = parseBody_(e);
+    if (data.form === 'audit') return handleAudit_(data);
 
     // Spam trap: real visitors never fill this in.
     if (data.company_website) return json_({ success: true });
@@ -124,7 +172,7 @@ function sendChecklist_(to, firstName, score) {
     htmlBody: html,
     replyTo: CONFIG.FROM_EMAIL
   };
-  const from = senderOption_();
+  const from = senderOption_(CONFIG.FROM_EMAIL);
   if (from) options.from = from;
 
   const pdf = fetchPdf_();
@@ -173,12 +221,14 @@ function scoreMessage_(n) {
   return 'Excellent. Keep it up by re-checking every quarter.';
 }
 
-function senderOption_() {
+function senderOption_(address) {
   const me = (Session.getEffectiveUser().getEmail() || '').toLowerCase();
-  const want = CONFIG.FROM_EMAIL.toLowerCase();
+  const want = String(address || '').toLowerCase();
   if (!want || me === want) return '';
   const aliases = GmailApp.getAliases().map(function (a) { return a.toLowerCase(); });
-  return aliases.indexOf(want) >= 0 ? CONFIG.FROM_EMAIL : '';
+  if (aliases.indexOf(want) >= 0) return address;
+  console.warn(address + ' is not a "Send mail as" alias on this account; sending from ' + me);
+  return '';
 }
 
 function getSheet_() {
@@ -189,6 +239,138 @@ function getSheet_() {
     sheet.appendRow(['Date', 'First name', 'Email', 'Checklist score', 'Page', 'Request', 'Status']);
     sheet.setFrozenRows(1);
     sheet.getRange('A1:G1').setFontWeight('bold');
+  }
+  return sheet;
+}
+
+// ===========================================================================
+// Audit requests
+// ===========================================================================
+
+/** Run from the editor to send yourself sample audit replies (one per version). */
+function testAuditReply() {
+  const me = Session.getActiveUser().getEmail();
+  sendAuditReply_({ name: 'Victoria Smith', business: 'Test Boutique', email: me,
+    package: 'Digital Shield', message: 'A contractor just left and we share one Google login.' });
+  sendAuditReply_({ name: 'Victoria Smith', business: 'Test Boutique', email: me,
+    package: 'Not sure yet', message: '' });
+  console.log('Two sample audit replies sent to ' + me);
+}
+
+function handleAudit_(data) {
+  if (data.botcheck === true || data.botcheck === 'true' || data.botcheck === 'on') return json_({ success: true });
+
+  const req = {
+    name: clean_(data.name),
+    business: clean_(data.business),
+    email: String(data.email || '').trim().toLowerCase(),
+    team_size: clean_(data.team_size),
+    package: clean_(data.package) || 'Not sure yet',
+    message: String(data.message || '').trim().slice(0, 2000),
+    page: clean_(data.page)
+  };
+  if (!req.name || !req.business || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(req.email)) {
+    return json_({ success: false, message: 'Please fill in your name, business and a valid email.' });
+  }
+
+  getAuditSheet_().appendRow([new Date(), req.name, req.business, req.email, req.team_size,
+    req.package, req.message, req.page, 'Auto-reply sent', '']);
+
+  sendAuditReply_(req);
+  if (CONFIG.AUDIT_NOTIFY_EMAIL) notifyAudit_(req);
+  return json_({ success: true });
+}
+
+function sendAuditReply_(req) {
+  const first = escape_(req.name.split(' ')[0]);
+  const business = escape_(req.business);
+  const pkg = PACKAGES[req.package];
+  const p = function (html) { return '<p style="margin:0 0 16px">' + html + '</p>'; };
+  const list = function (items) {
+    return '<ul style="margin:0 0 16px;padding-left:20px">' +
+      items.map(function (i) { return '<li style="margin:0 0 6px">' + i + '</li>'; }).join('') + '</ul>';
+  };
+  const note = req.message
+    ? p('You mentioned:') +
+      '<div style="margin:0 0 16px;padding:12px 16px;border-left:3px solid #E0A96D;background:#FDF7F1;color:#2B3A55;font-style:italic">' +
+      escape_(req.message).replace(/\n/g, '<br>') + '</div>' +
+      p('We\'ll make sure to dig into that on our call.')
+    : '';
+
+  let intro, details;
+  if (pkg) {
+    intro = p('Thank you for reaching out about the <b>' + escape_(req.package) + '</b> for ' + business + '.') + note +
+      p('The next step is a free 20-minute discovery call. I\'ll learn how your team works and which tools hold your most important data, and you can ask me anything. No prep or tech knowledge needed.');
+    details = p('<b>A quick look at what\'s included</b><br>' + escape_(req.package) + ': ' + pkg.price + ', ' + pkg.timeline) + list(pkg.items);
+  } else {
+    intro = p('Thank you for reaching out! You\'re in the right place. Not knowing where to start is completely normal, and figuring that out together is the point of our first conversation.') + note +
+      p('The next step is a free 20-minute discovery call. I\'ll learn how your team works and which tools hold your most important data, and by the end you\'ll know which package fits (if any). No pressure and no tech knowledge needed.');
+    details = p('<b>For a quick overview, most teams your size start with one of these:</b>') + list([
+      '<b>Security Jumpstart:</b> $1,450, 3–5 days. The essentials, fast.',
+      '<b>Digital Shield:</b> $2,850, 2 weeks. Adds offboarding, device hardening and spoofing protection.',
+      '<b>Pink Proxy Concierge:</b> $4,500, 3 weeks. Everything documented, rehearsed and ready for clients or insurers.'
+    ]);
+  }
+
+  const html =
+    '<div style="background:#F8ECEE;padding:24px 12px;font-family:Inter,Helvetica,Arial,sans-serif;color:#0A192F">' +
+    '<div style="max-width:580px;margin:0 auto;background:#ffffff;border-radius:14px;overflow:hidden">' +
+      '<div style="background:#0A192F;padding:22px 28px;font-weight:800;font-size:18px;color:#ffffff">The <span style="color:#F2A7BB">Pink</span> Proxy</div>' +
+      '<div style="padding:28px;font-size:15px;line-height:1.6">' +
+        p('Hi ' + first + ',') + intro +
+        '<div style="margin:4px 0 22px;padding:18px 20px;border-radius:12px;background:#0A192F;color:#ffffff">' +
+          '<div style="font-weight:700;font-size:16px;margin-bottom:10px">Pick a time for your free call</div>' +
+          '<a href="' + CONFIG.BOOKING_URL + '" style="display:inline-block;background:#E0A96D;color:#0A192F;font-weight:700;text-decoration:none;padding:11px 20px;border-radius:999px">Book my 20-minute call</a>' +
+          '<div style="font-size:12.5px;color:#A8B4C8;margin-top:10px">Times show in your local time zone. If none work, just reply and suggest a time.</div>' +
+        '</div>' +
+        details +
+        p('<b>To make the call as useful as possible, it helps to have a rough list of:</b>') +
+        '<ol style="margin:0 0 16px;padding-left:20px">' +
+          '<li style="margin:0 0 6px">The apps your team uses day to day (email, payments, file storage, etc.)</li>' +
+          '<li style="margin:0 0 6px">How many people and devices you have, including contractors</li>' +
+          '<li style="margin:0 0 6px">Who manages your website domain and email setup, if you know</li>' +
+        '</ol>' +
+        '<div style="margin:0 0 20px;padding:12px 16px;border-radius:10px;background:#F8ECEE;font-size:14px">' +
+          '<b>One important note:</b> please don\'t send me any passwords or login details by email. We\'ll handle anything sensitive together, securely, during our sessions.</div>' +
+        p('Looking forward to talking,') +
+        '<p style="margin:0"><b>' + escape_(CONFIG.SIGNATURE_NAME) + '</b><br>' + escape_(CONFIG.SIGNATURE_TITLE) + '<br>The Pink Proxy<br>' +
+          '<a href="mailto:' + CONFIG.CONSULT_EMAIL + '" style="color:#B9773A">' + CONFIG.CONSULT_EMAIL + '</a> · <a href="https://thepinkproxy.com" style="color:#B9773A">thepinkproxy.com</a></p>' +
+      '</div>' +
+    '</div></div>';
+
+  const text = 'Hi ' + req.name.split(' ')[0] + ',\n\nThank you for reaching out' +
+    (pkg ? ' about the ' + req.package + ' for ' + req.business : '') + '. The next step is a free 20-minute discovery call.\n\n' +
+    'Pick a time here: ' + CONFIG.BOOKING_URL + '\n\nPlease don\'t send any passwords or login details by email.\n\n' +
+    CONFIG.SIGNATURE_NAME + '\n' + CONFIG.SIGNATURE_TITLE + '\nThe Pink Proxy\n' + CONFIG.CONSULT_EMAIL;
+
+  const options = { name: CONFIG.FROM_NAME, htmlBody: html, replyTo: CONFIG.CONSULT_EMAIL };
+  const from = senderOption_(CONFIG.CONSULT_EMAIL);
+  if (from) options.from = from;
+
+  GmailApp.sendEmail(req.email, 'Your Cyber Hygiene Audit request, next steps for ' + req.business, text, options);
+}
+
+function notifyAudit_(req) {
+  MailApp.sendEmail({
+    to: CONFIG.AUDIT_NOTIFY_EMAIL,
+    replyTo: req.email,
+    subject: 'New audit request: ' + req.business + ' (' + req.package + ')',
+    body: 'Name: ' + req.name + '\nBusiness: ' + req.business + '\nEmail: ' + req.email +
+      '\nTeam size: ' + (req.team_size || '-') + '\nInterested in: ' + req.package +
+      '\n\nWhat\'s on their mind:\n' + (req.message || '(nothing added)') +
+      '\n\nThey were automatically sent your reply with the booking link.' +
+      '\nAll requests: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl()
+  });
+}
+
+function getAuditSheet_() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName(CONFIG.AUDIT_SHEET_NAME);
+  if (!sheet) {
+    sheet = ss.insertSheet(CONFIG.AUDIT_SHEET_NAME);
+    sheet.appendRow(['Date', 'Name', 'Business', 'Email', 'Team size', 'Package', "What's on their mind", 'Page', 'Status', 'Notes']);
+    sheet.setFrozenRows(1);
+    sheet.getRange('A1:J1').setFontWeight('bold');
   }
   return sheet;
 }
