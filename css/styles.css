@@ -151,15 +151,38 @@ nav.main a.nav-cta{background:var(--copper);color:var(--navy);margin-left:6px}
 @media (max-width:760px){.callout{grid-template-columns:1fr}}
 
 /* Contact block */
-.contact{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.email-box{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--white);border:1px solid var(--blush-line);border-radius:14px;padding:14px 14px 14px 20px}
-.email-box code{font-family:var(--display);font-weight:700;font-size:19px;color:var(--navy);user-select:all;flex:1;min-width:0;overflow-wrap:anywhere}
+.contact{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:start}
+.contact-intro{display:grid;gap:32px;min-width:0}
+.alt-contact{font-size:14px;color:var(--muted)}
+.email-inline{font-weight:600;color:var(--navy);user-select:all;overflow-wrap:anywhere}
 .steps{list-style:none;margin:0;padding:0;display:grid;gap:14px;counter-reset:s}
 .steps li{display:grid;grid-template-columns:32px 1fr;gap:14px;counter-increment:s}
 .steps li::before{content:counter(s);width:32px;height:32px;border-radius:50%;background:var(--navy);color:var(--copper);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:14px}
 .steps b{font-family:var(--display)}
 .steps p{font-size:15px;color:var(--muted)}
+
+/* Contact form */
+.contact-form{background:var(--blush);border-radius:20px;padding:clamp(22px,4vw,34px);display:grid;gap:20px;min-width:0}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:grid;gap:6px;min-width:0}
+.field.full{grid-column:1/-1}
+.field label{font-family:var(--display);font-weight:700;font-size:13.5px;color:var(--navy)}
+.field .opt{font-weight:500;color:var(--muted);font-size:12px;margin-left:4px}
+.field input,.field select,.field textarea{width:100%;font:inherit;font-size:15px;color:var(--navy);background:var(--white);border:1.5px solid var(--blush-line);border-radius:10px;padding:12px 14px;transition:border-color .15s ease,box-shadow .15s ease}
+.field textarea{resize:vertical;min-height:110px}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--copper);box-shadow:0 0 0 3px rgba(224,169,109,.25)}
+.field.invalid input,.field.invalid select{border-color:#C2410C}
+.field .err{font-size:12.5px;color:#B3261E}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.contact-form .submit{width:100%}
+.contact-form .submit[disabled]{opacity:.65;cursor:wait;transform:none}
+.form-note{font-size:12.5px;color:var(--muted);text-align:center;margin-top:-8px}
+.form-status{border-radius:12px;padding:16px 18px;font-size:15px}
+.form-status.ok{background:var(--navy);color:var(--on-navy)}
+.form-status.ok b{color:var(--white);font-family:var(--display);display:block;margin-bottom:4px}
+.form-status.fail{background:#FDECEA;color:#8C1D18}
 @media (max-width:860px){.contact{grid-template-columns:1fr}}
+@media (max-width:520px){.form-grid{grid-template-columns:1fr}}
 
 /* Page heads (services/about) */
 .page-head{background:var(--navy);color:var(--on-navy)}
@@ -264,6 +287,4 @@ footer .wrap{padding-block:56px 40px;display:grid;gap:36px}
 .f-bottom{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px}
 @media (max-width:760px){.f-top{grid-template-columns:1fr}}
 
-.copy-btn{font-family:var(--display);font-weight:700;font-size:13px;border:0;border-radius:999px;padding:10px 16px;background:var(--navy);color:var(--white);cursor:pointer}
-.copy-btn.done{background:var(--copper);color:var(--navy)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

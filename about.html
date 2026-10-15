@@ -107,20 +107,71 @@
 <!-- Booking / contact (same on every page) -->
 <section class="band" id="book">
   <div class="wrap contact">
-    <div class="section-head" style="margin-bottom:0">
-      <p class="eyebrow">Book your Cyber Hygiene Audit</p>
-      <h2 class="h2">Let's start with a conversation.</h2>
-      <p class="lede">Email us with your team size and the tools you use most. We'll reply within one business day with available times.</p>
-      <div class="email-box">
-        <code id="email">hello@thepinkproxy.com</code>
-        <button class="copy-btn" id="copy-email" type="button">Copy email</button>
+    <div class="contact-intro">
+      <div class="section-head" style="margin-bottom:0">
+        <p class="eyebrow">Book your Cyber Hygiene Audit</p>
+        <h2 class="h2">Let's start with a conversation.</h2>
+        <p class="lede">Tell us a little about your business. We'll reply within one business day with times for a free 20-minute discovery call.</p>
       </div>
+      <ol class="steps">
+        <li><div><b>20-minute discovery call</b><p>We learn how your team works and which tools hold your most important data.</p></div></li>
+        <li><div><b>Audit and quick wins</b><p>We review your setup across the five pillars and fix the highest-risk gaps first.</p></div></li>
+        <li><div><b>Plain-English report</b><p>You get a prioritized plan and a walkthrough call so nothing is a mystery.</p></div></li>
+      </ol>
+      <p class="alt-contact">Prefer email? Write to <span class="email-inline">hello@thepinkproxy.com</span></p>
     </div>
-    <ol class="steps">
-      <li><div><b>20-minute discovery call</b><p>We learn how your team works and which tools hold your most important data.</p></div></li>
-      <li><div><b>Audit and quick wins</b><p>We review your setup across the five pillars and fix the highest-risk gaps first.</p></div></li>
-      <li><div><b>Plain-English report</b><p>You get a prioritized plan and a walkthrough call so nothing is a mystery.</p></div></li>
-    </ol>
+
+    <form class="contact-form" id="contact-form" novalidate>
+      <!-- Web3Forms settings: paste your access key below (see README) -->
+      <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+      <input type="hidden" name="subject" value="New audit request from thepinkproxy.com">
+      <input type="hidden" name="from_name" value="The Pink Proxy website">
+      <!-- Spam trap: real visitors never see or fill this -->
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <div class="form-grid">
+        <div class="field">
+          <label for="cf-name">Your name</label>
+          <input id="cf-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="cf-business">Business name</label>
+          <input id="cf-business" name="business" type="text" autocomplete="organization" required>
+        </div>
+        <div class="field full">
+          <label for="cf-email">Email</label>
+          <input id="cf-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="cf-size">Team size</label>
+          <select id="cf-size" name="team_size" required>
+            <option value="" selected disabled>Choose one</option>
+            <option>Just me</option>
+            <option>2–5 people</option>
+            <option>6–10 people</option>
+            <option>More than 10</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="cf-package">Interested in</label>
+          <select id="cf-package" name="package">
+            <option value="Not sure yet" selected>Not sure yet</option>
+            <option value="Security Jumpstart">Security Jumpstart · $1,450</option>
+            <option value="Digital Shield">Digital Shield · $2,850</option>
+            <option value="Pink Proxy Concierge">Pink Proxy Concierge · $4,500</option>
+            <option value="Quarterly Maintenance">Quarterly Maintenance · $450/mo</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="cf-message">What's on your mind? <span class="opt">Optional</span></label>
+          <textarea id="cf-message" name="message" rows="4" placeholder="For example: a contractor just left, we share one Google login, or clients got a fake invoice."></textarea>
+        </div>
+      </div>
+
+      <button class="btn btn-primary submit" type="submit">Request My Audit</button>
+      <p class="form-note">We'll only use your details to reply to you. No newsletters unless you ask.</p>
+      <div class="form-status" id="form-status" role="status" aria-live="polite" hidden></div>
+    </form>
   </div>
 </section>
 </main>
