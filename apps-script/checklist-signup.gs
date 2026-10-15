@@ -39,7 +39,7 @@ const CONFIG = {
 
   // Your business mailing address. US anti-spam law (CAN-SPAM) requires a
   // physical postal address in marketing emails. A PO box is fine.
-  MAILING_ADDRESS: 'The Pink Proxy LLC · [YOUR MAILING ADDRESS] · Maryland, USA',
+  MAILING_ADDRESS: 'The Pink Proxy · [YOUR MAILING ADDRESS]',
 
   SHEET_NAME: 'Leads',
 
