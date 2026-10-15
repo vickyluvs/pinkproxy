@@ -81,7 +81,7 @@
         if (!res.ok) throw new Error(res.j && res.j.message);
         var name = (data.name || "").split(" ")[0];
         form.querySelectorAll(".form-grid, .submit, .form-note").forEach(function (el) { el.hidden = true; });
-        showStatus("ok", "<b>Thank you" + (name ? ", " + name.replace(/[<>&]/g, "") : "") + "!</b>Your request is in. Look for a reply from consult@thepinkproxy.com within one business day.<br><br>Want to skip the wait? <a href=\"https://calendar.app.google/7TKocTFCE8GXgCLu5\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--pink);font-weight:600\">Pick a time for your free discovery call →</a>");
+        showStatus("ok", "<b>Thank you" + (name ? ", " + name.replace(/[<>&]/g, "") : "") + "!</b>Your request is in. Look for a reply from consult@thepinkproxy.com within one business day.<br><br>Want to skip the wait? <a href=\"https://calendar.app.google/6q6vAAoAaH3e21nY7\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--pink);font-weight:600\">Pick a time for your free discovery call →</a>");
       })
       .catch(function () {
         showStatus("fail", "Something went wrong and your message wasn't sent. Please try again, or email <b>consult@thepinkproxy.com</b> directly.");
