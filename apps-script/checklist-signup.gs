@@ -22,8 +22,13 @@ const CONFIG = {
   // Where new-lead notifications go. Leave '' to turn them off.
   NOTIFY_EMAIL: 'info@thepinkproxy.com',
 
-  // Public link to the PDF on your website. Use your live site address.
+  // Link to the PDF on your website. This is the link people click in the email.
   PDF_URL: 'https://thepinkproxy.com/assets/pink-proxy-5-minute-checklist.pdf',
+
+  // Where the script downloads the PDF to attach it. Uses the copy in your
+  // GitHub repo because Cloudflare's bot protection blocks Google's servers
+  // from downloading files off your website.
+  PDF_ATTACHMENT_URL: 'https://raw.githubusercontent.com/vickyluvs/pinkproxy/main/assets/pink-proxy-5-minute-checklist.pdf',
 
   // Your business mailing address. US anti-spam law (CAN-SPAM) requires a
   // physical postal address in marketing emails. A PO box is fine.
@@ -122,14 +127,8 @@ function sendChecklist_(to, firstName, score) {
   const from = senderOption_();
   if (from) options.from = from;
 
-  try {
-    const pdf = UrlFetchApp.fetch(CONFIG.PDF_URL, { muteHttpExceptions: true });
-    if (pdf.getResponseCode() === 200) {
-      options.attachments = [pdf.getBlob().setName('The-Pink-Proxy-5-Minute-Checklist.pdf')];
-    }
-  } catch (err) {
-    console.warn('Could not attach PDF, sending link only: ' + err);
-  }
+  const pdf = fetchPdf_();
+  if (pdf) options.attachments = [pdf];
 
   GmailApp.sendEmail(
     to,
@@ -137,6 +136,24 @@ function sendChecklist_(to, firstName, score) {
     'Here is your checklist: ' + CONFIG.PDF_URL + '\n\nTo unsubscribe, reply "unsubscribe".\n' + CONFIG.MAILING_ADDRESS,
     options
   );
+}
+
+/** Downloads the checklist and confirms it is really a PDF before attaching it. */
+function fetchPdf_() {
+  try {
+    const res = UrlFetchApp.fetch(CONFIG.PDF_ATTACHMENT_URL, { muteHttpExceptions: true, followRedirects: true });
+    const bytes = res.getContent();
+    const isPdf = res.getResponseCode() === 200 && bytes.length > 4 &&
+      bytes[0] === 0x25 && bytes[1] === 0x50 && bytes[2] === 0x44 && bytes[3] === 0x46; // "%PDF"
+    if (!isPdf) {
+      console.warn('Attachment URL did not return a PDF (HTTP ' + res.getResponseCode() + '). Sending link only.');
+      return null;
+    }
+    return Utilities.newBlob(bytes, 'application/pdf', 'The-Pink-Proxy-5-Minute-Checklist.pdf');
+  } catch (err) {
+    console.warn('Could not download PDF, sending link only: ' + err);
+    return null;
+  }
 }
 
 function notifyOwner_(email, firstName, score) {
