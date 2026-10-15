@@ -169,6 +169,9 @@ nav.main a.nav-cta{background:var(--copper);color:var(--navy);margin-left:6px}
 /* Contact block */
 .contact{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:start}
 .contact-intro{display:grid;gap:32px;min-width:0}
+.book-direct{display:grid;gap:12px;justify-items:start;padding:20px 22px;border:1.5px dashed var(--copper);border-radius:16px;background:#FDF7F1}
+.book-direct p{font-size:15px;color:var(--navy-ink)}
+.book-direct b{font-family:var(--display);color:var(--navy)}
 .alt-contact{font-size:14px;color:var(--muted)}
 .email-inline{font-weight:600;color:var(--navy);user-select:all;overflow-wrap:anywhere}
 .steps{list-style:none;margin:0;padding:0;display:grid;gap:14px;counter-reset:s}
