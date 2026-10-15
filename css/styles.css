@@ -301,6 +301,9 @@ footer .wrap{padding-block:56px 40px;display:grid;gap:36px}
 .f-top ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 .f-top a{color:var(--on-navy);text-decoration:none}
 .f-top a:hover{color:var(--copper)}
+.social a{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+.social .handle{font-weight:400;color:var(--on-navy-muted)}
+.social svg{width:13px;height:13px;color:var(--pink)}
 .legal{border-top:1px solid rgba(255,255,255,.1);padding-top:26px;font-size:12.5px;line-height:1.7;display:grid;gap:10px}
 .legal b{color:var(--on-navy)}
 .f-bottom{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px}
