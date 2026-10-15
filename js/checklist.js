@@ -55,8 +55,8 @@
 // Sends the visitor's name, email and score to the Google Apps Script web app,
 // which saves them to the Leads sheet and emails the PDF (see apps-script/SETUP.md).
 (function () {
-  // Paste your Apps Script web app URL here (ends in /exec).
-  var SIGNUP_ENDPOINT = "";
+  // Apps Script web app URL (see apps-script/SETUP.md).
+  var SIGNUP_ENDPOINT = "https://script.google.com/macros/s/AKfycbzXfHRIPViE4qpt9o-_am67e3BR_mtrK8F60teHqNCizkEqM7u5bJv3kamOmOTR-odgLw/exec";
 
   var form = document.getElementById("pdf-signup");
   if (!form) return;
