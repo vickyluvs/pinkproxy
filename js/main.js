@@ -60,7 +60,7 @@
 
     var key = form.querySelector('[name="access_key"]').value;
     if (!key || key.indexOf("YOUR_") === 0) {
-      showStatus("fail", "The contact form isn't connected yet. Please email <b>hello@thepinkproxy.com</b> instead.");
+      showStatus("fail", "The contact form isn't connected yet. Please email <b>consult@thepinkproxy.com</b> instead.");
       return;
     }
 
@@ -81,10 +81,10 @@
         if (!res.ok) throw new Error(res.j && res.j.message);
         var name = (data.name || "").split(" ")[0];
         form.querySelectorAll(".form-grid, .submit, .form-note").forEach(function (el) { el.hidden = true; });
-        showStatus("ok", "<b>Thank you" + (name ? ", " + name.replace(/[<>&]/g, "") : "") + "!</b>Your request is in. Look for a reply from hello@thepinkproxy.com within one business day.");
+        showStatus("ok", "<b>Thank you" + (name ? ", " + name.replace(/[<>&]/g, "") : "") + "!</b>Your request is in. Look for a reply from consult@thepinkproxy.com within one business day.");
       })
       .catch(function () {
-        showStatus("fail", "Something went wrong and your message wasn't sent. Please try again, or email <b>hello@thepinkproxy.com</b> directly.");
+        showStatus("fail", "Something went wrong and your message wasn't sent. Please try again, or email <b>consult@thepinkproxy.com</b> directly.");
       })
       .finally(function () {
         submitBtn.disabled = false;
