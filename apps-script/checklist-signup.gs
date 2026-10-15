@@ -1,3 +1,6 @@
+/** @OnlyCurrentDoc */
+// ^ Limits this script to the one Google Sheet it is attached to (not all your spreadsheets).
+
 /**
  * The Pink Proxy: 5-Minute Checklist signup
  * ------------------------------------------------------------
