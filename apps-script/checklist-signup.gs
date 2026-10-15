@@ -60,22 +60,22 @@ const CONFIG = {
 /** Package details used in the automatic audit reply. Keep in sync with the Services page. */
 const PACKAGES = {
   'Security Jumpstart': {
-    price: '$1,450', timeline: '3–5 days',
-    items: ['A remote Cyber Hygiene Audit across all five pillars',
-            'Multi-factor sign-in and a business password manager for your team',
-            'A prioritized, plain-English findings report and walkthrough call']
+    price: '$1,450', timeline: '3–5 business days',
+    items: ['A non-intrusive 25-point Cyber Hygiene Audit, including your Google Workspace or Microsoft 365 setup',
+            'Three quick wins: MFA on your email, bank and domain accounts, former staff accounts removed, and your domain locked',
+            'An executive summary and step-by-step fix roadmap, with a 60-minute walkthrough']
   },
   'Digital Shield': {
-    price: '$2,850', timeline: 'about 2 weeks',
+    price: '$2,850', timeline: '10–14 business days',
     items: ['Everything in the Security Jumpstart',
-            'A custom offboarding runbook and a role-based access map',
-            'Email spoofing protection (DMARC enforcement) and device hardening']
+            'MFA for everyone and a team password manager, rolled out for you',
+            'Email spoofing protection, laptop hardening and a 15-minute offboarding playbook']
   },
   'Pink Proxy Concierge': {
-    price: '$4,500', timeline: 'about 3 weeks',
+    price: '$4,500', timeline: '15–21 business days',
     items: ['Everything in the Digital Shield',
-            'Written security policies and a tabletop exercise with your team',
-            'A NIST CSF 2.0 profile report you can share with insurers and clients']
+            'Office Wi-Fi, file-sharing, backups and wire-fraud controls set up',
+            'Written policies, a staff briefing with a real-world scenario, a NIST CSF 2.0 report and 30 days of support']
   },
   'Quarterly Maintenance': {
     price: '$450/month', timeline: 'ongoing',
@@ -301,14 +301,15 @@ function sendAuditReply_(req) {
   if (pkg) {
     intro = p('Thank you for reaching out about the <b>' + escape_(req.package) + '</b> for ' + business + '.') + note +
       p('The next step is a free 20-minute discovery call. I\'ll learn how your team works and which tools hold your most important data, and you can ask me anything. No prep or tech knowledge needed.');
-    details = p('<b>A quick look at what\'s included</b><br>' + escape_(req.package) + ': ' + pkg.price + ', ' + pkg.timeline) + list(pkg.items);
+    details = p('<b>A quick look at what\'s included</b><br>' + escape_(req.package) + ': ' + pkg.price + ', ' + pkg.timeline) + list(pkg.items) +
+      p('<span style="font-size:13px;color:#5A6378">Software subscriptions (like a password manager or backup service) are billed by the provider directly to you. I\'ll recommend affordable options on our call.</span>');
   } else {
     intro = p('Thank you for reaching out! You\'re in the right place. Not knowing where to start is completely normal, and figuring that out together is the point of our first conversation.') + note +
       p('The next step is a free 20-minute discovery call. I\'ll learn how your team works and which tools hold your most important data, and by the end you\'ll know which package fits (if any). No pressure and no tech knowledge needed.');
     details = p('<b>For a quick overview, most teams your size start with one of these:</b>') + list([
-      '<b>Security Jumpstart:</b> $1,450, 3–5 days. The essentials, fast.',
-      '<b>Digital Shield:</b> $2,850, 2 weeks. Adds offboarding, device hardening and spoofing protection.',
-      '<b>Pink Proxy Concierge:</b> $4,500, 3 weeks. Everything documented, rehearsed and ready for clients or insurers.'
+      '<b>Security Jumpstart:</b> $1,450, 3–5 business days. A full 25-point audit plus three quick wins.',
+      '<b>Digital Shield:</b> $2,850, 10–14 business days. MFA, a password manager, spoofing protection, laptop hardening and offboarding.',
+      '<b>Pink Proxy Concierge:</b> $4,500, 15–21 business days. All 25 points in place, plus policies, staff briefing and a NIST CSF report.'
     ]);
   }
 

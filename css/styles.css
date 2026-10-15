@@ -231,7 +231,11 @@ nav.main a.nav-cta{background:var(--copper);color:var(--navy);margin-left:6px}
 .tier li svg{width:16px;height:16px;margin-top:4px;color:var(--copper-deep)}
 .tier.rec li svg{color:var(--copper)}
 .tier li.inc{font-weight:600}
-.tier .btn{margin-top:auto;width:100%}
+.tier .scope-line{margin-top:auto;font-family:var(--display);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--copper-deep);padding-top:14px;border-top:1px dashed var(--blush-line)}
+.tier.rec .scope-line{color:var(--pink);border-color:rgba(255,255,255,.14)}
+.tier .btn{width:100%}
+.tier li b{font-weight:700}
+.software-note{margin-top:18px;font-size:14px;color:var(--muted);text-align:center;max-width:70ch;margin-inline:auto}
 .tier.rec .btn-outline{color:var(--white);border-color:var(--copper)}
 @media (max-width:960px){.tiers{grid-template-columns:1fr;max-width:560px;margin:0 auto}.tier .for{min-height:0}}
 
