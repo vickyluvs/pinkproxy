@@ -2,7 +2,7 @@
    Layout: navy authority bands alternate with blush/white working sections; copper used only for actions and fine rules. Single deliberate light look. */
 :root{
   --navy:#0A192F; --navy-2:#13294A; --navy-ink:#2B3A55;
-  --copper:#E0A96D; --copper-deep:#B9773A; --copper-soft:#F3DDC4;
+  --pink:#F2A7BB; --copper:#E0A96D; --copper-deep:#B9773A; --copper-soft:#F3DDC4;
   --blush:#F8ECEE; --blush-line:#ECD7DB; --white:#FFFFFF;
   --muted:#5A6378; --on-navy:#E9EEF6; --on-navy-muted:#A8B4C8;
   --display:"Plus Jakarta Sans","Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -50,7 +50,7 @@ header.site{position:sticky;top:0;z-index:20;background:rgba(10,25,47,.97);backd
 header .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:16px;flex-wrap:wrap}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);font-family:var(--display);font-weight:800;font-size:18px;letter-spacing:-.01em}
 .logo-mark{width:30px;height:30px;flex:none}
-.logo span em{font-style:normal;color:var(--copper)}
+.logo span em{font-style:normal;color:var(--pink)}
 nav.main{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 nav.main a{color:var(--on-navy-muted);text-decoration:none;font-family:var(--display);font-weight:600;font-size:14px;padding:8px 12px;border-radius:999px}
 nav.main a:hover{color:var(--white)}
