@@ -31,3 +31,12 @@ Each version is a git tag; roll back one category with `git revert <tag>`.
 - Maintenance renamed "Optional Ongoing Cyber Care": billed monthly, 3-month minimum, 30 days' notice to cancel, quarterly work separated from monthly work, hours limit referenced (not stated), "not 24/7 monitoring". 50/50 terms explicitly don't apply. Form option renamed to match.
 - FAQ: what happens after the call, when you pay and what "complete" means, choosing any package plus upgrade credit, what access is needed, when the estimate starts and what delays it, support after delivery.
 - **Not done (owner decisions):** user/device/domain/location limits, supported platforms and client time commitment (P03). Nothing invented.
+
+## review-04: Homepage (P1: H01, H02, H03)
+- New hero: "Know who has access. Know what to fix first." The Security Jumpstart offer, "$1,450 total project fee", 50/50 terms, estimated 3–5 business days from kickoff, one main call button plus "Compare Security Packages". Checklist moved to a small text link.
+- Access-review card labelled "Illustrative example · not client data", with a caption explaining what it shows.
+- New order: hero → problems and fixes → package overview (price, scope, timeline) → what we cover → who you'll work with → is this for you → call to action → free checklist → booking and how it works.
+- Package overview cards link to each package on the pricing page.
+- "What we cover" keeps the five areas but drops the NIST CSF code chips; one sentence explains the mapping and that it isn't a certification.
+- Short founder block (initials until a photo is supplied) linking to About.
+- The long values section replaced with a short "Built for small teams that want clarity and control". The "cheapest option" line removed.
