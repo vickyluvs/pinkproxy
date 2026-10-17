@@ -41,7 +41,7 @@
       <a href="index.html">Home</a>
       <a href="services.html">Services &amp; Pricing</a>
       <a href="about.html" aria-current="page">About</a>
-      <a href="#book" class="nav-cta">Book an Audit</a>
+      <a href="#book" class="nav-cta">Book a Free Call</a>
     </nav>
   </div>
 </header>
@@ -140,42 +140,51 @@
   <div class="wrap contact">
     <div class="contact-intro">
       <div class="section-head" style="margin-bottom:0">
-        <p class="eyebrow">Book your Cyber Hygiene Audit</p>
-        <h2 class="h2">Let's start with a conversation.</h2>
-        <p class="lede">Tell us a little about your business. We'll reply within one business day with times for a free 20-minute discovery call.</p>
+        <p class="eyebrow">Free 20-minute discovery call</p>
+        <h2 class="h2">Let's find the right security package for your business.</h2>
+        <p class="lede">Book a free 20-minute discovery call to discuss your team, the tools you use, and your main concerns. We'll answer your questions and confirm which package fits before you decide to move forward.</p>
       </div>
-      <ol class="steps">
-        <li><div><b>20-minute discovery call</b><p>We learn how your team works and which tools hold your most important data.</p></div></li>
-        <li><div><b>Audit and quick wins</b><p>We review your setup across the five pillars and fix the highest-risk gaps first.</p></div></li>
-        <li><div><b>Plain-English report</b><p>You get a prioritized plan and a walkthrough call so nothing is a mystery.</p></div></li>
-      </ol>
       <div class="book-direct">
-        <p><b>Rather pick a time now?</b> Skip the form and book your free discovery call directly.</p>
-        <a class="btn btn-navy" href="https://calendar.app.google/6q6vAAoAaH3e21nY7" target="_blank" rel="noopener">Book a Free 20-Minute Call <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-primary" href="https://calendar.app.google/6q6vAAoAaH3e21nY7" target="_blank" rel="noopener">Book a Free 20-Minute Call <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <p class="pay-note"><b>No payment is required to book.</b> One-time projects are paid 50% upfront before work begins and 50% when the agreed work is complete.</p>
+      </div>
+      <div class="how">
+        <h3>How it works</h3>
+        <ol class="steps">
+          <li><div><b>Free discovery call</b><p>We learn how your team works, which tools hold your important data, and what's worrying you.</p></div></li>
+          <li><div><b>Confirm the details</b><p>We agree on the package, scope and payment terms, and you sign a written authorization listing exactly what we'll work on.</p></div></li>
+          <li><div><b>Pay the first 50% and we begin</b><p>We start the agreed work on the scheduled kickoff date.</p></div></li>
+          <li><div><b>Deliverables and walkthrough</b><p>You get your plain-English report and a walkthrough call, so you understand what changed and what to do next.</p></div></li>
+          <li><div><b>Pay the remaining 50%</b><p>The final payment is due when the agreed work is complete.</p></div></li>
+        </ol>
       </div>
       <p class="alt-contact">Prefer email? Write to <span class="email-inline">consult@thepinkproxy.com</span></p>
     </div>
 
     <form class="contact-form" id="contact-form" novalidate>
+      <div class="form-head">
+        <h3>Prefer us to get in touch?</h3>
+        <p>Complete the form below. We'll reply within one business day to arrange your free call.</p>
+      </div>
       <!-- Spam trap: real visitors never see or fill this -->
       <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 
       <div class="form-grid">
         <div class="field">
-          <label for="cf-name">Your name</label>
-          <input id="cf-name" name="name" type="text" autocomplete="name" required>
+          <label for="cf-name">Your name <span class="req" aria-hidden="true">*</span></label>
+          <input id="cf-name" name="name" type="text" autocomplete="name" required aria-required="true">
         </div>
         <div class="field">
-          <label for="cf-business">Business name</label>
-          <input id="cf-business" name="business" type="text" autocomplete="organization" required>
+          <label for="cf-business">Business name <span class="req" aria-hidden="true">*</span></label>
+          <input id="cf-business" name="business" type="text" autocomplete="organization" required aria-required="true">
         </div>
         <div class="field full">
-          <label for="cf-email">Email</label>
-          <input id="cf-email" name="email" type="email" autocomplete="email" required>
+          <label for="cf-email">Email <span class="req" aria-hidden="true">*</span></label>
+          <input id="cf-email" name="email" type="email" autocomplete="email" required aria-required="true">
         </div>
         <div class="field">
-          <label for="cf-size">Team size</label>
-          <select id="cf-size" name="team_size" required>
+          <label for="cf-size">Team size <span class="req" aria-hidden="true">*</span></label>
+          <select id="cf-size" name="team_size" required aria-required="true">
             <option value="" selected disabled>Choose one</option>
             <option>Just me</option>
             <option>2–5 people</option>
@@ -195,12 +204,14 @@
         </div>
         <div class="field full">
           <label for="cf-message">What's on your mind? <span class="opt">Optional</span></label>
-          <textarea id="cf-message" name="message" rows="4" placeholder="For example: a contractor just left, we share one Google login, or clients got a fake invoice."></textarea>
+          <textarea id="cf-message" name="message" rows="4" aria-describedby="cf-sensitive" placeholder="For example: a contractor just left, we share one Google login, or clients got a fake invoice."></textarea>
+          <p class="hint" id="cf-sensitive">Please do not include passwords, recovery codes, financial details, or sensitive client information.</p>
         </div>
       </div>
+      <p class="req-note"><span aria-hidden="true">*</span> Required</p>
 
-      <button class="btn btn-primary submit" type="submit">Request My Audit</button>
-      <p class="form-note">We'll only use your details to reply to you. No newsletters unless you ask.</p>
+      <button class="btn btn-primary submit" type="submit">Request My Free Discovery Call</button>
+      <p class="form-note">We'll only use your details to reply to you. No newsletters unless you ask. <a href="privacy.html">Privacy notice</a></p>
       <div class="form-status" id="form-status" role="status" aria-live="polite" hidden></div>
     </form>
   </div>
@@ -216,7 +227,7 @@
       </div>
       <div>
         <h4>Explore</h4>
-        <ul><li><a href="index.html">Home</a></li><li><a href="services.html">Services &amp; Pricing</a></li><li><a href="about.html">About</a></li><li><a href="index.html#checklist">Free Checklist</a></li></ul>
+        <ul><li><a href="index.html">Home</a></li><li><a href="services.html">Services &amp; Pricing</a></li><li><a href="about.html">About</a></li><li><a href="index.html#checklist">Free Checklist</a></li><li><a href="privacy.html">Privacy Notice</a></li></ul>
       </div>
       <div>
         <h4>Connect</h4>

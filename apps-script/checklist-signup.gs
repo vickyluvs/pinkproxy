@@ -60,25 +60,25 @@ const CONFIG = {
 /** Package details used in the automatic audit reply. Keep in sync with the Services page. */
 const PACKAGES = {
   'Security Jumpstart': {
-    price: '$1,450', timeline: '3–5 business days',
+    price: '$1,450 total project fee', timeline: 'an estimated 3–5 business days',
     items: ['A non-intrusive 25-point Cyber Hygiene Audit, including your Google Workspace or Microsoft 365 setup',
             'Three quick wins: MFA on your email, bank and domain accounts, former staff accounts removed, and your domain locked',
             'An executive summary and step-by-step fix roadmap, with a 60-minute walkthrough']
   },
   'Digital Shield': {
-    price: '$2,850', timeline: '10–14 business days',
+    price: '$2,850 total project fee', timeline: 'an estimated 10–14 business days',
     items: ['Everything in the Security Jumpstart',
             'MFA for everyone and a team password manager, rolled out for you',
-            'Email spoofing protection, laptop hardening and a 15-minute offboarding playbook']
+            'Email spoofing protection, laptop hardening and a documented offboarding playbook for your apps']
   },
   'Pink Proxy Concierge': {
-    price: '$4,500', timeline: '15–21 business days',
+    price: '$4,500 total project fee', timeline: 'an estimated 15–21 business days',
     items: ['Everything in the Digital Shield',
             'Office Wi-Fi, file-sharing, backups and wire-fraud controls set up',
-            'Written policies, a staff briefing with a real-world scenario, a NIST CSF 2.0 report and 30 days of support']
+            'Written policies, a staff briefing with a real-world scenario, a report mapping the work to NIST CSF 2.0, and 30 days of email support']
   },
   'Quarterly Maintenance': {
-    price: '$450/month', timeline: 'ongoing',
+    price: '$450/month', timeline: 'ongoing, billed monthly',
     items: ['A quarterly access review and cleanup',
             'Help whenever someone joins or leaves your team',
             'Email and backup spot-checks, plus a quarterly check-in call']
@@ -300,16 +300,16 @@ function sendAuditReply_(req) {
   let intro, details;
   if (pkg) {
     intro = p('Thank you for reaching out about the <b>' + escape_(req.package) + '</b> for ' + business + '.') + note +
-      p('The next step is a free 20-minute discovery call. I\'ll learn how your team works and which tools hold your most important data, and you can ask me anything. No prep or tech knowledge needed.');
+      p('The next step is a free 20-minute discovery call. I\'ll learn how your team works and which tools hold your most important data, you can ask me anything, and together we\'ll confirm whether this package is the right fit. No prep or tech knowledge needed.');
     details = p('<b>A quick look at what\'s included</b><br>' + escape_(req.package) + ': ' + pkg.price + ', ' + pkg.timeline) + list(pkg.items) +
       p('<span style="font-size:13px;color:#5A6378">Software subscriptions (like a password manager or backup service) are billed by the provider directly to you. I\'ll recommend affordable options on our call.</span>');
   } else {
     intro = p('Thank you for reaching out! You\'re in the right place. Not knowing where to start is completely normal, and figuring that out together is the point of our first conversation.') + note +
       p('The next step is a free 20-minute discovery call. I\'ll learn how your team works and which tools hold your most important data, and by the end you\'ll know which package fits (if any). No pressure and no tech knowledge needed.');
     details = p('<b>For a quick overview, most teams your size start with one of these:</b>') + list([
-      '<b>Security Jumpstart:</b> $1,450, 3–5 business days. A full 25-point audit plus three quick wins.',
-      '<b>Digital Shield:</b> $2,850, 10–14 business days. MFA, a password manager, spoofing protection, laptop hardening and offboarding.',
-      '<b>Pink Proxy Concierge:</b> $4,500, 15–21 business days. All 25 points in place, plus policies, staff briefing and a NIST CSF report.'
+      '<b>Security Jumpstart:</b> $1,450 total, an estimated 3–5 business days. A 25-point Cyber Hygiene Audit, three priority fixes and a plain-English action plan.',
+      '<b>Digital Shield:</b> $2,850 total, an estimated 10–14 business days. MFA, a password manager, email spoofing protection, laptop hardening and an offboarding playbook.',
+      '<b>Pink Proxy Concierge:</b> $4,500 total, an estimated 15–21 business days. Everything in the Digital Shield plus network and backup safeguards, written policies and team training.'
     ]);
   }
 
@@ -325,6 +325,7 @@ function sendAuditReply_(req) {
           '<div style="font-size:12.5px;color:#A8B4C8;margin-top:10px">Times show in your local time zone. If none work, just reply and suggest a time.</div>' +
         '</div>' +
         details +
+        p('<span style="font-size:13px;color:#5A6378"><b>No payment is needed for the call.</b> If you decide to go ahead, we\'ll confirm the package, scope and payment terms in writing first. One-time projects are paid 50% upfront before work begins and 50% when the agreed work is complete. Ongoing care is billed monthly.</span>') +
         p('<b>To make the call as useful as possible, it helps to have a rough list of:</b>') +
         '<ol style="margin:0 0 16px;padding-left:20px">' +
           '<li style="margin:0 0 6px">The apps your team uses day to day (email, payments, file storage, etc.)</li>' +
@@ -341,21 +342,21 @@ function sendAuditReply_(req) {
 
   const text = 'Hi ' + req.name.split(' ')[0] + ',\n\nThank you for reaching out' +
     (pkg ? ' about the ' + req.package + ' for ' + req.business : '') + '. The next step is a free 20-minute discovery call.\n\n' +
-    'Pick a time here: ' + CONFIG.BOOKING_URL + '\n\nPlease don\'t send any passwords or login details by email.\n\n' +
+    'Pick a time here: ' + CONFIG.BOOKING_URL + '\n\nNo payment is needed for the call. If you go ahead, one-time projects are paid 50% upfront before work begins and 50% when the agreed work is complete.\n\nPlease don\'t send any passwords or login details by email.\n\n' +
     CONFIG.SIGNATURE_NAME + '\n' + CONFIG.SIGNATURE_TITLE + '\nThe Pink Proxy\n' + CONFIG.CONSULT_EMAIL;
 
   const options = { name: CONFIG.FROM_NAME, htmlBody: html, replyTo: CONFIG.CONSULT_EMAIL };
   const from = senderOption_(CONFIG.CONSULT_EMAIL);
   if (from) options.from = from;
 
-  GmailApp.sendEmail(req.email, 'Your Cyber Hygiene Audit request, next steps for ' + req.business, text, options);
+  GmailApp.sendEmail(req.email, 'Your free discovery call with The Pink Proxy: next steps for ' + req.business, text, options);
 }
 
 function notifyAudit_(req) {
   MailApp.sendEmail({
     to: CONFIG.AUDIT_NOTIFY_EMAIL,
     replyTo: req.email,
-    subject: 'New audit request: ' + req.business + ' (' + req.package + ')',
+    subject: 'New discovery call request: ' + req.business + ' (' + req.package + ')',
     body: 'Name: ' + req.name + '\nBusiness: ' + req.business + '\nEmail: ' + req.email +
       '\nTeam size: ' + (req.team_size || '-') + '\nInterested in: ' + req.package +
       '\n\nWhat\'s on their mind:\n' + (req.message || '(nothing added)') +

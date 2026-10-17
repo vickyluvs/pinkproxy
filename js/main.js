@@ -56,6 +56,7 @@
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
+    if (submitBtn.disabled) return; // already sending
     statusEl.hidden = true;
     if (!validate()) return;
 
@@ -74,14 +75,16 @@
         if (!res || !res.success) throw new Error(res && res.message);
         var name = (data.name || "").split(" ")[0];
         form.querySelectorAll(".form-grid, .submit, .form-note").forEach(function (el) { el.hidden = true; });
-        showStatus("ok", "<b>Thank you" + (name ? ", " + name.replace(/[<>&]/g, "") : "") + "!</b>Your request is in. We just emailed you next steps from consult@thepinkproxy.com (check your spam folder if you don\'t see it).<br><br>Ready now? <a href=\"https://calendar.app.google/6q6vAAoAaH3e21nY7\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--pink);font-weight:600\">Pick a time for your free discovery call →</a>");
+        showStatus("ok", "<b>Thank you" + (name ? ", " + name.replace(/[<>&]/g, "") : "") + "!</b>Your request is in. We'll reply within one business day from consult@thepinkproxy.com to arrange your free 20-minute discovery call. We've also sent you a confirmation email (check your spam folder if you don\'t see it). This is a request, not a booked appointment.<br><br>Rather pick a time now? <a href=\"https://calendar.app.google/6q6vAAoAaH3e21nY7\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--pink);font-weight:600\">Book a free 20-minute call →</a>");
       })
       .catch(function () {
         showStatus("fail", "Something went wrong and your message wasn't sent. Please try again, or email <b>consult@thepinkproxy.com</b> directly.");
       })
       .finally(function () {
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Request My Audit";
+        if (!statusEl.classList.contains("ok")) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Request My Free Discovery Call";
+        }
       });
   });
 })();
