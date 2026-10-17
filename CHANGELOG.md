@@ -21,3 +21,13 @@ Each version is a git tag; roll back one category with `git revert <tag>`.
 - "15-minute offboarding playbook" changed to "a documented offboarding playbook for your apps".
 - "NIST CSF 2.0 report for insurers and clients" changed to "A report mapping completed work and recommendations to NIST CSF 2.0".
 - Home meta description no longer says "audits".
+
+## review-03: Services & Pricing page (P1: P01, P02, P04, FAQ; P03 partial)
+- New "Which package fits?" chooser above the cards: one line, price and timeline per package, stacked on phones.
+- Card subtitles: Audit & Quick Fixes / Core Security Setup / Security Setup & Team Readiness, with the brief's summaries.
+- Prices show "total project fee" with the 50/50 split underneath (e.g. $725 upfront · $725 upon completion) and "Estimated delivery: X business days from kickoff".
+- Checklist-number summaries replaced with plain-English outcomes.
+- Payment terms added to the note under the cards.
+- Maintenance renamed "Optional Ongoing Cyber Care": billed monthly, 3-month minimum, 30 days' notice to cancel, quarterly work separated from monthly work, hours limit referenced (not stated), "not 24/7 monitoring". 50/50 terms explicitly don't apply. Form option renamed to match.
+- FAQ: what happens after the call, when you pay and what "complete" means, choosing any package plus upgrade credit, what access is needed, when the estimate starts and what delays it, support after delivery.
+- **Not done (owner decisions):** user/device/domain/location limits, supported platforms and client time commitment (P03). Nothing invented.

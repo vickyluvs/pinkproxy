@@ -57,12 +57,24 @@
 
   <section class="band blush">
     <div class="wrap">
+      <div class="chooser" aria-label="Package overview">
+        <div class="chooser-head">
+          <h2 class="h2">Which package fits?</h2>
+          <p>Each package can be chosen on its own, and each one includes everything in the one before it. Prices are fixed for teams of 3–10. Not sure? That's what the free call is for.</p>
+        </div>
+        <div class="chooser-grid">
+          <a class="pick" href="#tier-jumpstart"><b>Security Jumpstart</b><span>Review and initial fixes</span><em>$1,450 · 3–5 business days</em></a>
+          <a class="pick rec" href="#tier-shield"><b>Digital Shield</b><span>Core safeguards implemented</span><em>$2,850 · 10–14 business days</em></a>
+          <a class="pick" href="#tier-concierge"><b>Pink Proxy Concierge</b><span>Broader safeguards, policies and training</span><em>$4,500 · 15–21 business days</em></a>
+        </div>
+      </div>
       <div class="tiers">
-        <article class="tier">
+        <article class="tier" id="tier-jumpstart">
           <p class="tnum">Tier 1</p>
           <h3>The Security Jumpstart</h3>
-          <p class="for">For teams who want to know exactly where they stand, with a few fast fixes.</p>
-          <div class="price"><b>$1,450</b><span>one-time · 3–5 business days</span></div>
+          <p class="tsub">Audit &amp; Quick Fixes</p>
+          <p class="for">Get a clear picture of your business's security gaps, three priority fixes, and a step-by-step plan for what to address next.</p>
+          <div class="price tier-price"><div class="total"><b>$1,450</b><span>total project fee</span></div><p class="split">$725 upfront · $725 upon completion</p><p class="eta">Estimated delivery: 3–5 business days from kickoff</p></div>
           <ul>
             <li><svg><use href="#i-check"/></svg>Non-intrusive 25-point Cyber Hygiene Audit</li>
             <li><svg><use href="#i-check"/></svg>Google Workspace or Microsoft 365 security review</li>
@@ -71,16 +83,17 @@
             <li><svg><use href="#i-check"/></svg><span><b>3 quick wins:</b> MFA on your email, bank and domain accounts, former staff accounts removed, and your domain locked</span></li>
             <li><svg><use href="#i-check"/></svg>Executive summary and step-by-step fix roadmap, with a 60-minute walkthrough</li>
           </ul>
-          <p class="scope-line">Audits all 25 checklist items</p>
+          <p class="scope-line">Reviews all 25 checks and fixes the 3 highest-priority gaps</p>
           <div class="cta-stack"><a class="btn btn-outline" href="#book" data-package="Security Jumpstart">Book a Free 20-Minute Call</a><p class="cta-sub">Discuss Security Jumpstart. No payment required to book.</p></div>
         </article>
 
-        <article class="tier rec">
+        <article class="tier rec" id="tier-shield">
           <span class="badge">Recommended</span>
           <p class="tnum">Tier 2</p>
           <h3>The Digital Shield</h3>
-          <p class="for">For growing teams with staff or contractors coming and going.</p>
-          <div class="price"><b>$2,850</b><span>one-time · 10–14 business days</span></div>
+          <p class="tsub">Core Security Setup</p>
+          <p class="for">Strengthen your team's accounts, email, and devices, with clearer access permissions and an offboarding playbook built around your apps.</p>
+          <div class="price tier-price"><div class="total"><b>$2,850</b><span>total project fee</span></div><p class="split">$1,425 upfront · $1,425 upon completion</p><p class="eta">Estimated delivery: 10–14 business days from kickoff</p></div>
           <ul>
             <li class="inc"><svg><use href="#i-check"/></svg>Everything in the Jumpstart</li>
             <li><svg><use href="#i-check"/></svg>MFA required for everyone, plus a team password manager rolled out</li>
@@ -90,15 +103,16 @@
             <li><svg><use href="#i-check"/></svg>A documented offboarding playbook written for your apps</li>
             <li><svg><use href="#i-check"/></svg>60-minute admin handover so you can run it yourself</li>
           </ul>
-          <p class="scope-line">Puts checklist items 1–12 and 15–17 in place</p>
+          <p class="scope-line">Puts core account, email and device safeguards in place</p>
           <div class="cta-stack"><a class="btn btn-primary" href="#book" data-package="Digital Shield">Book a Free 20-Minute Call</a><p class="cta-sub">Discuss Digital Shield. No payment required to book.</p></div>
         </article>
 
-        <article class="tier">
+        <article class="tier" id="tier-concierge">
           <p class="tnum">Tier 3</p>
           <h3>Pink Proxy Concierge</h3>
-          <p class="for">For teams handling client money or data who want everything documented.</p>
-          <div class="price"><b>$4,500</b><span>one-time · 15–21 business days</span></div>
+          <p class="tsub">Security Setup &amp; Team Readiness</p>
+          <p class="for">Build on your core security setup with broader network and backup safeguards, written policies, and practical team training.</p>
+          <div class="price tier-price"><div class="total"><b>$4,500</b><span>total project fee</span></div><p class="split">$2,250 upfront · $2,250 upon completion</p><p class="eta">Estimated delivery: 15–21 business days from kickoff</p></div>
           <ul>
             <li class="inc"><svg><use href="#i-check"/></svg>Everything in the Digital Shield</li>
             <li><svg><use href="#i-check"/></svg>Office Wi-Fi and router secured, with a separate guest network</li>
@@ -110,26 +124,24 @@
             <li><svg><use href="#i-check"/></svg>A report mapping completed work and recommendations to NIST CSF 2.0</li>
             <li><svg><use href="#i-check"/></svg>30 days of email support</li>
           </ul>
-          <p class="scope-line">Puts all 25 checklist items in place</p>
+          <p class="scope-line">Puts all 25 checks in place, plus policies and team training</p>
           <div class="cta-stack"><a class="btn btn-outline" href="#book" data-package="Pink Proxy Concierge">Book a Free 20-Minute Call</a><p class="cta-sub">Discuss Concierge. No payment required to book.</p></div>
         </article>
       </div>
-      <p class="software-note">Software subscriptions such as your password manager, backups or virus protection are billed by the provider directly to you. We help you choose affordable options that fit your team.</p>
+      <p class="software-note">No payment is required to book a call. One-time projects are paid 50% upfront before work begins and 50% when the agreed work is complete. Software subscriptions such as your password manager, backups or virus protection are billed by the provider directly to you; we help you choose affordable options that fit your team.</p>
 
       <article class="retainer">
         <div>
-          <p class="eyebrow">Ongoing care</p>
-          <h3>Quarterly Cyber Hygiene Maintenance</h3>
-          <div class="price"><b>$450</b><span>/ month</span></div>
+          <p class="eyebrow">Optional ongoing care</p>
+          <h3>Optional Ongoing Cyber Care</h3>
+          <div class="price"><b>$450</b><span>/ month, billed monthly</span></div>
+          <p class="ret-terms">3-month minimum, then month to month. Cancel with 30 days' notice. Usually starts after a package, so there's a baseline to keep in place. Project 50/50 terms don't apply.</p>
         </div>
-        <ul>
-          <li>Quarterly access review and cleanup</li>
-          <li>New-hire and exit support as needed</li>
-          <li>DMARC report monitoring</li>
-          <li>Device update and backup spot-checks</li>
-          <li>Quarterly 45-minute check-in call</li>
-          <li>Priority email response</li>
-        </ul>
+        <div class="ret-cols">
+          <div><h4>Every quarter</h4><ul><li>Access review and cleanup</li><li>45-minute check-in call and short written summary</li></ul></div>
+          <div><h4>Throughout the month</h4><ul><li>Help when someone joins or leaves your team</li><li>DMARC email report monitoring</li><li>Device update and backup spot-checks</li><li>Email support for questions between check-ins</li></ul></div>
+          <p class="ret-note">A set number of support hours is included each month, agreed in your maintenance agreement. This is not 24/7 monitoring.</p>
+        </div>
         <div class="cta-stack"><a class="btn btn-navy" href="#book" data-package="Quarterly Maintenance">Book a Free 20-Minute Call</a><p class="cta-sub">Discuss ongoing care. No payment required to book.</p></div>
       </article>
 
@@ -156,7 +168,12 @@
         <details><summary>Which tools do you work with?</summary><p>Google Workspace, Microsoft 365, Slack, Shopify, QuickBooks, Canva, Dropbox and most common small-business apps.</p></details>
         <details><summary>Are software costs included?</summary><p>No. Tools like a password manager or backup service are billed by the provider directly to you, usually a few dollars per person per month. We recommend options that fit your budget, and many have free tiers.</p></details>
         <details><summary>What is the 25-point checklist?</summary><p>It's the 25-point Cyber Hygiene Audit at the heart of the Security Jumpstart, and the starting point of every package: 25 checks across logins, email, devices, Wi-Fi and data. The free 5-minute checklist on our home page covers 10 of the most important ones.</p></details>
-        <details><summary>Can I upgrade later?</summary><p>Yes. If you start with the Jumpstart and move to a higher tier within 60 days, the Jumpstart fee is credited toward it.</p></details>
+        <details><summary>Can I choose any package directly, and how do upgrades work?</summary><p>Yes, you can start with any of the three packages. If you start with the Jumpstart and move to a higher package within 60 days, the Jumpstart fee is credited toward it.</p></details>
+        <details><summary>What happens after I book the free call?</summary><p>We talk for 20 minutes about your team, your tools and your concerns. If a package fits, we send a proposal with the scope, price and payment terms. Nothing is agreed and nothing is charged until you sign.</p></details>
+        <details><summary>When do I pay, and how is completion defined?</summary><p>One-time projects are paid 50% upfront before work begins and 50% when the agreed work is complete, meaning the deliverables listed in your agreement have been provided and we've held your walkthrough call. Ongoing care is billed monthly.</p></details>
+        <details><summary>What access do you need?</summary><p>Only the accounts listed in your signed written authorization. You add us as a user on those accounts; we never ask for your passwords. We remove our access when the work is done, unless you've chosen ongoing care.</p></details>
+        <details><summary>When does the delivery estimate start, and what can delay it?</summary><p>From kickoff, once the agreement is signed, the first payment is made, your intake questionnaire is back and we have the access we need. Waiting on access, approvals or software sign-ups can move the date, and we'll tell you if it does.</p></details>
+        <details><summary>What support is included after delivery?</summary><p>Every package ends with a walkthrough call. The Concierge includes 30 days of email support. For help after that, you can add Optional Ongoing Cyber Care.</p></details>
       </div>
     </div>
   </section>
@@ -225,7 +242,7 @@
             <option value="Security Jumpstart">Security Jumpstart · $1,450</option>
             <option value="Digital Shield">Digital Shield · $2,850</option>
             <option value="Pink Proxy Concierge">Pink Proxy Concierge · $4,500</option>
-            <option value="Quarterly Maintenance">Quarterly Maintenance · $450/mo</option>
+            <option value="Quarterly Maintenance">Ongoing Cyber Care · $450/mo</option>
           </select>
         </div>
         <div class="field full">
