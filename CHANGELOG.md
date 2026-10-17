@@ -56,3 +56,12 @@ Each version is a git tag; roll back one category with `git revert <tag>`.
 - Privacy wording is accurate: answers stay in the browser; the PDF request sends first name, email and score only (score only once the checklist is finished), never individual answers. Privacy notice link added.
 - "Clear my answers" link. Earlier saved answers carry over.
 - Apps Script checklist email: "You answered Yes to X of 10 checks… a self-check, not a security assessment." Needs a new deployment version.
+
+## review-07: Mobile and accessibility QA (P1: Q01)
+- Tested Home, Services, About and Privacy at 320, 375, 390, 430 px and desktop: no sideways scrolling or clipped content.
+- Automated accessibility scan (axe-core, WCAG 2 A/AA plus best practices): all pages now pass with 0 issues.
+  - Darker rose gold for small text on light backgrounds (#94591F instead of #B9773A) to meet 4.5:1 contrast.
+  - Heading order fixed (example card title, footer headings).
+- Phone header: no longer sticky below 620px and more compact (155px → 95px at 320px), so it can't cover content. Anchor links leave room for the sticky header on desktop.
+- Forms: double-submit guard; Apps Script now limits each email to 3 submissions per 10 minutes for both forms (needs a new deployment version).
+- **Not tested here:** real iPhone Safari, enlarged system text, live form delivery and the Google Calendar booking page. Check these on your phone after publishing.

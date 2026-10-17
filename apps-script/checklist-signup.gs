@@ -101,6 +101,9 @@ function doPost(e) {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return json_({ success: false, message: 'Please enter a valid email address.' });
     }
+    if (tooMany_('checklist', email, 3)) {
+      return json_({ success: false, message: 'The checklist is already on its way. Please check your inbox.' });
+    }
 
     const sheet = getSheet_();
     const isRepeat = sheet.getLastRow() > 1 &&
@@ -257,6 +260,16 @@ function testAuditReply() {
   console.log('Two sample audit replies sent to ' + me);
 }
 
+
+/** Simple rate limit: at most `max` submissions per email per 10 minutes. */
+function tooMany_(kind, email, max) {
+  const cache = CacheService.getScriptCache();
+  const key = 'rl:' + kind + ':' + email;
+  const n = Number(cache.get(key) || 0) + 1;
+  cache.put(key, String(n), 600);
+  return n > max;
+}
+
 function handleAudit_(data) {
   if (data.botcheck === true || data.botcheck === 'true' || data.botcheck === 'on') return json_({ success: true });
 
@@ -271,6 +284,9 @@ function handleAudit_(data) {
   };
   if (!req.name || !req.business || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(req.email)) {
     return json_({ success: false, message: 'Please fill in your name, business and a valid email.' });
+  }
+  if (tooMany_('audit', req.email, 3)) {
+    return json_({ success: false, message: 'We already have your request. Please wait a few minutes before sending another.' });
   }
 
   getAuditSheet_().appendRow([new Date(), req.name, req.business, req.email, req.team_size,
