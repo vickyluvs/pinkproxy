@@ -205,17 +205,27 @@
   <section class="band blush" id="checklist">
     <div class="wrap checklist">
       <div class="checklist-intro">
-      <div class="section-head" style="margin-bottom:0">
-        <p class="eyebrow">Free 5-minute checklist</p>
-        <h2 class="h2">How protected is your business right now?</h2>
-        <p class="lede">Tick off what's already true for your team and get a quick read on where you stand. Your answers stay in your browser.</p>
+        <div class="section-head" style="margin-bottom:0">
+          <p class="eyebrow">Free 5-minute checklist</p>
+          <h2 class="h2">How protected is your business right now?</h2>
+          <p class="lede">Answer 10 quick questions about your team's logins, email, devices and backups. It's a self-check to help you spot areas worth reviewing, not a security assessment.</p>
+          <p class="cl-privacy">Your answers are saved only in this browser. They're never sent to us.</p>
+        </div>
       </div>
-      <form class="pdf-signup" id="pdf-signup" novalidate>
+      <div class="checklist-main">
+        <div class="card">
+          <div class="cl-progress"><span id="cl-count">0 of 10 answered</span><b id="cl-score">Not assessed yet</b></div>
+          <div class="meter" aria-hidden="true"><i id="cl-meter"></i></div>
+          <ol class="cl-list" id="cl-list"></ol>
+          <div class="cl-result" id="cl-result" aria-live="polite" hidden></div>
+          <button type="button" class="cl-reset" id="cl-reset">Clear my answers</button>
+        </div>
+        <form class="pdf-signup" id="pdf-signup" novalidate>
         <div class="pdf-signup-head">
           <svg class="pdf-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 3v5h5M10 13l2 2 3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <div>
-            <h3>Get the printable PDF</h3>
-            <p>All 10 checks, why each one matters, and a quick fix for every gap. We'll email it to you along with your score.</p>
+            <h3>Want a copy? Get the printable PDF</h3>
+            <p>All 10 checks, why each one matters, and a quick fix for every gap. We'll email it to you, with your score if you've finished the checklist.</p>
           </div>
         </div>
         <input type="text" name="company_website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -230,15 +240,9 @@
           </div>
         </div>
         <button class="btn btn-primary submit" type="submit">Email Me the Checklist</button>
-        <p class="pdf-consent">You'll also get occasional security tips from The Pink Proxy. Unsubscribe anytime.</p>
+        <p class="pdf-consent">We'll receive your first name, email and score (not your answers). You'll also get occasional security tips; reply "unsubscribe" anytime. <a href="privacy.html">Privacy notice</a></p>
         <div class="form-status" id="pdf-status" role="status" aria-live="polite" hidden></div>
       </form>
-      </div>
-      <div class="card">
-        <div class="cl-progress"><span>Your score</span><b><span id="cl-score">0</span> / 10</b></div>
-        <div class="meter"><i id="cl-meter"></i></div>
-        <ul class="cl-list" id="cl-list"></ul>
-        <div class="cl-result" id="cl-result" aria-live="polite"></div>
       </div>
     </div>
   </section>

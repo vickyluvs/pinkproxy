@@ -1,5 +1,5 @@
 // Free 5-minute checklist (home page only).
-// Answers are saved in the visitor's own browser via localStorage.
+// Answers (Yes / No / Not sure) are saved only in the visitor's own browser via localStorage.
 (function () {
   var list = document.getElementById("cl-list");
   if (!list) return;
@@ -16,43 +16,74 @@
     ["Guests use a separate Wi-Fi network", "Your business devices stay on their own network."],
     ["You know who to call if something goes wrong", "Written down somewhere the whole team can find."]
   ];
+  var CHOICES = [["yes", "Yes"], ["no", "No"], ["unsure", "Not sure"]];
+  var STORAGE_KEY = "pp-checklist-v2";
 
-  var STORAGE_KEY = "pp-checklist";
-  var saved = [];
-  try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); } catch (e) {}
+  var answers = {};
+  try {
+    answers = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}") || {};
+    var old = JSON.parse(localStorage.getItem("pp-checklist") || "null"); // earlier version stored ticked items only
+    if (old && Array.isArray(old) && !Object.keys(answers).length) old.forEach(function (i) { answers[i] = "yes"; });
+  } catch (e) { answers = {}; }
 
   items.forEach(function (it, i) {
     var li = document.createElement("li");
-    li.innerHTML =
-      '<label for="cl-' + i + '"><input type="checkbox" id="cl-' + i + '"' +
-      (saved.indexOf(i) >= 0 ? " checked" : "") + "><span>" + it[0] +
-      "<small>" + it[1] + "</small></span></label>";
+    var radios = CHOICES.map(function (c) {
+      var id = "cl-" + i + "-" + c[0];
+      return '<input type="radio" name="cl-' + i + '" id="' + id + '" value="' + c[0] + '"' + (answers[i] === c[0] ? " checked" : "") + '>' +
+             '<label for="' + id + '">' + c[1] + "</label>";
+    }).join("");
+    li.innerHTML = '<fieldset><legend><span class="q">' + it[0] + "</span><small>" + it[1] + "</small></legend>" +
+                   '<div class="seg">' + radios + "</div></fieldset>";
     list.appendChild(li);
   });
 
-  function message(n) {
-    if (n <= 4) return "Your foundation has some open doors. A Security Jumpstart would close the biggest ones within a week.";
-    if (n <= 7) return "You've got good habits started. The Digital Shield would lock in access, exits and email.";
-    if (n <= 9) return "Strong start. A quick audit would confirm the details and fill the last gaps.";
-    return "Excellent. Quarterly maintenance will keep it that way as your team grows.";
-  }
+  var scoreEl = document.getElementById("cl-score");
+  var countEl = document.getElementById("cl-count");
+  var meter = document.getElementById("cl-meter");
+  var result = document.getElementById("cl-result");
 
   function update() {
-    var checked = [];
-    list.querySelectorAll("input").forEach(function (c, i) { if (c.checked) checked.push(i); });
-    var n = checked.length;
-    document.getElementById("cl-score").textContent = n;
-    document.getElementById("cl-meter").style.width = (n * 10) + "%";
-    document.getElementById("cl-result").textContent = message(n);
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(checked)); } catch (e) {}
+    answers = {};
+    list.querySelectorAll("input:checked").forEach(function (r) { answers[r.name.slice(3)] = r.value; });
+    var vals = Object.keys(answers).map(function (k) { return answers[k]; });
+    var answered = vals.length;
+    var yes = vals.filter(function (v) { return v === "yes"; }).length;
+    var unsure = vals.filter(function (v) { return v === "unsure"; }).length;
+
+    countEl.textContent = answered + " of " + items.length + " answered";
+    meter.style.width = (answered / items.length * 100) + "%";
+
+    if (answered < items.length) {
+      scoreEl.textContent = "Not assessed yet";
+      scoreEl.dataset.score = "";
+      result.hidden = true;
+    } else {
+      scoreEl.textContent = yes + " of 10 in place";
+      scoreEl.dataset.score = String(yes);
+      var lead = yes === items.length
+        ? "Your answers suggest strong security habits. A free discovery call can help confirm nothing has been missed, and ongoing care can help keep it that way as your team grows."
+        : "Your answers suggest areas worth reviewing. A free discovery call can help confirm the right package and next steps.";
+      var unsureLine = unsure ? "<p>You marked " + unsure + (unsure === 1 ? " item" : " items") + " as Not sure. Those are worth checking too.</p>" : "";
+      result.innerHTML = "<p><b>You answered Yes to " + yes + " of 10.</b> " + lead + "</p>" + unsureLine +
+        '<p class="cl-disclaimer">This result is based only on your own answers. It is not a security assessment and doesn\'t guarantee protection.</p>' +
+        '<a class="btn btn-primary" href="#book">Book a Free 20-Minute Call</a>';
+      result.hidden = false;
+    }
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(answers)); } catch (e) {}
   }
 
   list.addEventListener("change", update);
+  var reset = document.getElementById("cl-reset");
+  if (reset) reset.addEventListener("click", function () {
+    list.querySelectorAll("input:checked").forEach(function (r) { r.checked = false; });
+    update();
+  });
   update();
 })();
 
 // "Email me the checklist" signup.
-// Sends the visitor's name, email and score to the Google Apps Script web app,
+// Sends the visitor's first name, email and score (never individual answers) to the Google Apps Script web app,
 // which saves them to the Leads sheet and emails the PDF (see apps-script/SETUP.md).
 (function () {
   // Apps Script web app URL (see apps-script/SETUP.md).
@@ -87,6 +118,7 @@
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
+    if (btn.disabled) return;
     statusEl.hidden = true;
     var email = emailInput.value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -103,7 +135,7 @@
     var data = {
       first_name: form.first_name.value.trim(),
       email: email,
-      score: scoreEl ? scoreEl.textContent : "",
+      score: scoreEl && scoreEl.dataset.score ? scoreEl.dataset.score : "", // only sent once the checklist is finished
       company_website: form.company_website.value,
       page: location.pathname
     };

@@ -47,3 +47,12 @@ Each version is a git tag; roll back one category with `git revert <tag>`.
 - Founder story updated with the brief's version; Victoria's original quote kept. **Victoria to verify every personal claim and the degree badge.**
 - Repeated "who we work best with" section removed from About (the homepage keeps a short version), including "The cheapest option, whatever the result".
 - "The Old Way vs. The Pink Proxy Way" table replaced with "What working with The Pink Proxy looks like": 7 factual cards that stack on phones. No claims about other providers.
+
+## review-06: Free checklist (P1: C01, C02, C03)
+- Each question now has Yes / No / Not sure buttons, so unanswered and "no" are different.
+- Starts at "Not assessed yet · 0 of 10 answered". The result only appears once all 10 are answered.
+- Result wording is qualified: "Your answers suggest areas worth reviewing. A free discovery call can help confirm the right package and next steps." It mentions Not sure answers, includes a "not a security assessment" note and a call button. The "a Jumpstart would close the biggest gaps within a week" claim is removed.
+- Order is now: answer → result → next step → optional PDF by email.
+- Privacy wording is accurate: answers stay in the browser; the PDF request sends first name, email and score only (score only once the checklist is finished), never individual answers. Privacy notice link added.
+- "Clear my answers" link. Earlier saved answers carry over.
+- Apps Script checklist email: "You answered Yes to X of 10 checks… a self-check, not a security assessment." Needs a new deployment version.

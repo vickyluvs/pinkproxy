@@ -145,7 +145,7 @@ function testSend() {
 function sendChecklist_(to, firstName, score) {
   const hi = firstName ? 'Hi ' + escape_(firstName) + ',' : 'Hi there,';
   const scoreLine = (score !== undefined && score !== '' && !isNaN(Number(score)))
-    ? '<p style="margin:0 0 16px">You scored <b>' + Number(score) + ' out of 10</b> on the website checklist. ' + scoreMessage_(Number(score)) + '</p>'
+    ? '<p style="margin:0 0 16px">You answered Yes to <b>' + Number(score) + ' of 10</b> checks on the website checklist. ' + scoreMessage_(Number(score)) + ' This is a self-check based on your answers, not a security assessment.</p>'
     : '';
 
   const html =
