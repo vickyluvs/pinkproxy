@@ -40,3 +40,10 @@ Each version is a git tag; roll back one category with `git revert <tag>`.
 - "What we cover" keeps the five areas but drops the NIST CSF code chips; one sentence explains the mapping and that it isn't a certification.
 - Short founder block (initials until a photo is supplied) linking to About.
 - The long values section replaced with a short "Built for small teams that want clarity and control". The "cheapest option" line removed.
+
+## review-05: About page (P1: A01, A02, A03, A04)
+- New intro: "Practical cybersecurity. A partner who explains it."
+- The large "VS" panel replaced with a compact founder card (initials marked decorative for screen readers) until a photo is supplied.
+- Founder story updated with the brief's version; Victoria's original quote kept. **Victoria to verify every personal claim and the degree badge.**
+- Repeated "who we work best with" section removed from About (the homepage keeps a short version), including "The cheapest option, whatever the result".
+- "The Old Way vs. The Pink Proxy Way" table replaced with "What working with The Pink Proxy looks like": 7 factual cards that stack on phones. No claims about other providers.
