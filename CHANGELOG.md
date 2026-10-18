@@ -77,3 +77,10 @@ Each version is a git tag; roll back one category with `git revert <tag>`.
 - Footer disclaimer updated to the playbook's wording, plus "not affiliated with or endorsed by Google, NIST or CISA".
 - Apps Script auto-reply text updated to match (needs a new deployment version).
 - Jumpstart and Shield website prices unchanged; pilot clients are quoted the test prices ($995 / $1,950) privately.
+
+## review-09: Fewer repeated buttons, sourced facts on Services
+- Services page had 5 "Book a Free 20-Minute Call" buttons. Now 1 (the booking section) plus the nav button. Each package card has a quiet "Ask about this package →" link that still jumps to the form and pre-fills the package.
+- New "Two things we often hear" section above the pricing:
+  - "Isn't Google Workspace already secure?" Google's small-business security checklist (admins set up redundant admins, phishing/spoofing protections, sharing permissions) and CISA's "minimum viable security configurations" for Google Workspace.
+  - "We're too small to be hacked." NIST quotes ("The size of a business is never going to be a form of protection"; "a particularly ripe target"; "easy targets to get into bigger businesses through the supply chain") and two IBM 2025 figures (phishing 16%, the most common starting point; 241 days to identify and contain).
+  - Every fact links to its source. Checked October 18, 2026.

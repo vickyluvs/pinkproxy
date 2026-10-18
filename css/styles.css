@@ -459,3 +459,24 @@ footer .wrap{padding-block:56px 40px;display:grid;gap:36px}
 .retainer.retainer-lite > .cta-stack{grid-column:auto}
 .retainer-lite .ret-terms{max-width:60ch}
 @media (max-width:760px){.retainer.retainer-lite{grid-template-columns:1fr}}
+
+/* Services: quiet package links + facts (review 09) */
+.pkg-link{margin-top:auto;padding-top:14px;font-family:var(--display);font-weight:700;font-size:15px;color:var(--copper-deep);text-decoration:none;display:inline-flex;gap:6px;align-self:flex-start}
+.pkg-link:hover{text-decoration:underline}
+.tier .scope-line + .pkg-link{margin-top:0}
+.tier.rec .pkg-link{color:var(--pink)}
+.retainer-lite .pkg-link{margin-top:0;padding-top:0}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.fact{background:var(--blush);border-radius:18px;padding:28px;display:grid;gap:14px;align-content:start;min-width:0}
+.fact h3{font-size:21px;font-weight:800}
+.fact p{font-size:15.5px;color:var(--navy-ink)}
+.fact blockquote{margin:0;padding:4px 0 4px 18px;border-left:3px solid var(--copper);font-family:var(--display);font-weight:700;font-size:19px;line-height:1.35;color:var(--navy)}
+.fact cite{display:block;margin-top:6px;font-family:var(--body);font-style:normal;font-weight:500;font-size:13px;color:var(--muted)}
+.fact .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fact .stats div{background:var(--white);border-radius:12px;padding:14px 16px;display:grid;gap:4px}
+.fact .stats b{font-family:var(--display);font-size:26px;font-weight:800;color:var(--navy);font-variant-numeric:tabular-nums}
+.fact .stats span{font-size:13px;color:var(--navy-ink);line-height:1.4}
+.fact .src{font-size:12.5px;color:var(--muted)}
+.fact .src a{color:var(--copper-deep)}
+@media (max-width:860px){.facts{grid-template-columns:1fr}}
+@media (max-width:420px){.fact .stats{grid-template-columns:1fr}}
