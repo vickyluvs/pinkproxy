@@ -161,7 +161,7 @@ function sendChecklist_(to, firstName, score) {
         '<p style="margin:0 0 16px">Here is your copy of <b>The 5-Minute Cyber Hygiene Checklist</b>. It\'s attached as a PDF, and you can also open it here:</p>' +
         '<p style="margin:0 0 20px"><a href="' + CONFIG.PDF_URL + '" style="display:inline-block;background:#E0A96D;color:#0A192F;font-weight:700;text-decoration:none;padding:12px 22px;border-radius:999px">Open the checklist</a></p>' +
         scoreLine +
-        '<p style="margin:0 0 16px">Each item includes a quick fix you can do yourself. If you\'d like a second pair of eyes, you can <a href="' + CONFIG.BOOKING_URL + '" style="color:#B9773A">book a free 20-minute discovery call</a>, or just reply to this email.</p>' +
+        '<p style="margin:0 0 16px">Each item explains why it matters for your business. If you\'d like help putting things right, you can <a href="' + CONFIG.BOOKING_URL + '" style="color:#94591F">book a free 20-minute discovery call</a>, or just reply to this email.</p>' +
         '<p style="margin:0">Talk soon,<br><b>Victoria Smith</b><br>Founder, The Pink Proxy</p>' +
       '</div>' +
       '<div style="padding:16px 28px;border-top:1px solid #ECD7DB;font-size:11.5px;line-height:1.5;color:#5A6378">' +
@@ -352,7 +352,7 @@ function sendAuditReply_(req) {
           '<b>One important note:</b> please don\'t send me any passwords or login details by email. We\'ll handle anything sensitive together, securely, during our sessions.</div>' +
         p('Looking forward to talking,') +
         '<p style="margin:0"><b>' + escape_(CONFIG.SIGNATURE_NAME) + '</b><br>' + escape_(CONFIG.SIGNATURE_TITLE) + '<br>The Pink Proxy<br>' +
-          '<a href="mailto:' + CONFIG.CONSULT_EMAIL + '" style="color:#B9773A">' + CONFIG.CONSULT_EMAIL + '</a> · <a href="https://thepinkproxy.com" style="color:#B9773A">thepinkproxy.com</a></p>' +
+          '<a href="mailto:' + CONFIG.CONSULT_EMAIL + '" style="color:#94591F">' + CONFIG.CONSULT_EMAIL + '</a> · <a href="https://thepinkproxy.com" style="color:#94591F">thepinkproxy.com</a></p>' +
       '</div>' +
     '</div></div>';
 
