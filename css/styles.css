@@ -500,3 +500,7 @@ footer .wrap{padding-block:56px 40px;display:grid;gap:36px}
 .work-photo figcaption{margin-top:10px;font-size:14px;color:var(--navy-ink)}
 .work-photo figcaption span{display:block;font-size:13px;color:var(--muted);margin-top:2px}
 @media (max-width:820px){.work-split{grid-template-columns:1fr}.work-photo img{aspect-ratio:4/3}}
+/* review-12: Workspace kicker + trademark note */
+.h1-kicker{display:flex;align-items:center;gap:12px;width:fit-content;margin-bottom:18px;padding:8px 18px 8px 12px;border-radius:999px;background:rgba(242,167,187,.12);border:1px solid rgba(242,167,187,.45);color:var(--pink);font-size:clamp(20px,2.3vw,28px);font-weight:800;letter-spacing:-.01em;line-height:1.2}
+.h1-kicker::before{content:"";flex:none;width:1.1em;height:1.1em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F2A7BB' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z'/%3E%3Cpath d='M9 12l2 2 4-4'/%3E%3C/svg%3E") center/contain no-repeat}
+.f-tm{margin-top:10px;font-size:12px;opacity:.75}

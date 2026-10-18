@@ -3,6 +3,15 @@
 Changes from the Developer Implementation Brief (October 17, 2026), one version per category.
 Each version is a git tag; roll back one category with `git revert <tag>`.
 
+## review-12 — Workspace prominence & SEO
+- Hero: "Google Workspace Security" is now a large pink badge inside the H1; the eyebrow names the audience.
+- Services H1 now names Google Workspace.
+- New page titles and meta descriptions that say what we offer and do (Workspace security, 2-Step Verification, admin access, sharing, onboarding/offboarding, prices).
+- Canonical URLs, Open Graph/Twitter tags and a 1200×630 share image (assets/og-image.png).
+- Structured data: ProfessionalService + OfferCatalog (home), Service (services).
+- robots.txt and sitemap.xml.
+- Footer: Google Workspace trademark / not-affiliated note.
+
 ## review-11 — Photos
 - Homepage "Is this for you?": added a "Built for owners like these" row of five stock photos (studios, cafés, designers, real estate, artists), labeled as illustrative stock images, not clients.
 - About "How we work": added a small-team photo beside the cards.
