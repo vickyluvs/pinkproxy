@@ -455,3 +455,7 @@ footer .wrap{padding-block:56px 40px;display:grid;gap:36px}
 }
 .roster-head .roster-title{font-family:var(--display);font-size:15px;font-weight:800;margin:0}
 .f-top .f-h{font-family:var(--display)}
+.retainer.retainer-lite{grid-template-columns:minmax(0,1fr) auto;align-items:center}
+.retainer.retainer-lite > .cta-stack{grid-column:auto}
+.retainer-lite .ret-terms{max-width:60ch}
+@media (max-width:760px){.retainer.retainer-lite{grid-template-columns:1fr}}

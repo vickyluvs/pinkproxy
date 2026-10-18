@@ -61,27 +61,27 @@ const CONFIG = {
 const PACKAGES = {
   'Security Jumpstart': {
     price: '$1,450 total project fee', timeline: 'an estimated 3–5 business days',
-    items: ['A non-intrusive 25-point Cyber Hygiene Audit, including your Google Workspace or Microsoft 365 setup',
-            'Three quick wins: MFA on your email, bank and domain accounts, former staff accounts removed, and your domain locked',
-            'An executive summary and step-by-step fix roadmap, with a 60-minute walkthrough']
+    items: ['A review of your Google Workspace users, admin roles, 2-Step Verification, account recovery and sharing settings',
+            'Three priority fixes chosen from an agreed list, such as 2-Step Verification for admins or suspending a former user',
+            'Plain-English findings, a record of what was changed and checked, and a 60-minute walkthrough']
   },
   'Digital Shield': {
     price: '$2,850 total project fee', timeline: 'an estimated 10–14 business days',
     items: ['Everything in the Security Jumpstart',
-            'MFA for everyone and a team password manager, rolled out for you',
-            'Email spoofing protection, laptop hardening and a documented offboarding playbook for your apps']
+            '2-Step Verification rolled out and checked for everyone, plus groups and sharing settings tidied',
+            'Email spoofing protection where you can grant DNS access, and a documented onboarding and offboarding checklist']
   },
   'Pink Proxy Concierge': {
-    price: '$4,500 total project fee', timeline: 'an estimated 15–21 business days',
+    price: 'a custom quote, from $2,950', timeline: 'a schedule set in your proposal',
     items: ['Everything in the Digital Shield',
-            'Office Wi-Fi, file-sharing, backups and wire-fraud controls set up',
-            'Written policies, a staff briefing with a real-world scenario, a report mapping the work to NIST CSF 2.0, and 30 days of email support']
+            'Additions chosen for your team, such as an account ownership register or an access-request process',
+            'A team briefing with a departure scenario walkthrough, and a follow-up recheck']
   },
   'Quarterly Maintenance': {
-    price: '$450/month', timeline: 'ongoing, billed monthly',
-    items: ['A quarterly access review and cleanup',
-            'Help whenever someone joins or leaves your team',
-            'Email and backup spot-checks, plus a quarterly check-in call']
+    price: 'quoted after we talk', timeline: 'scheduled around your team',
+    items: ['Scheduled reviews of who has access to your Google Workspace',
+            'Help keeping access tidy as people join and leave',
+            'Scoped to your team; not 24/7 monitoring']
   }
 };
 
@@ -318,14 +318,14 @@ function sendAuditReply_(req) {
     intro = p('Thank you for reaching out about the <b>' + escape_(req.package) + '</b> for ' + business + '.') + note +
       p('The next step is a free 20-minute discovery call. I\'ll learn how your team works and which tools hold your most important data, you can ask me anything, and together we\'ll confirm whether this package is the right fit. No prep or tech knowledge needed.');
     details = p('<b>A quick look at what\'s included</b><br>' + escape_(req.package) + ': ' + pkg.price + ', ' + pkg.timeline) + list(pkg.items) +
-      p('<span style="font-size:13px;color:#5A6378">Software subscriptions (like a password manager or backup service) are billed by the provider directly to you. I\'ll recommend affordable options on our call.</span>');
+      p('<span style="font-size:13px;color:#5A6378">Software costs, such as a Google Workspace plan upgrade, are billed by the provider directly to you. I\'ll flag anything needed on our call.</span>');
   } else {
     intro = p('Thank you for reaching out! You\'re in the right place. Not knowing where to start is completely normal, and figuring that out together is the point of our first conversation.') + note +
       p('The next step is a free 20-minute discovery call. I\'ll learn how your team works and which tools hold your most important data, and by the end you\'ll know which package fits (if any). No pressure and no tech knowledge needed.');
     details = p('<b>For a quick overview, most teams your size start with one of these:</b>') + list([
-      '<b>Security Jumpstart:</b> $1,450 total, an estimated 3–5 business days. A 25-point Cyber Hygiene Audit, three priority fixes and a plain-English action plan.',
-      '<b>Digital Shield:</b> $2,850 total, an estimated 10–14 business days. MFA, a password manager, email spoofing protection, laptop hardening and an offboarding playbook.',
-      '<b>Pink Proxy Concierge:</b> $4,500 total, an estimated 15–21 business days. Everything in the Digital Shield plus network and backup safeguards, written policies and team training.'
+      '<b>Security Jumpstart:</b> $1,450 total, an estimated 3–5 business days. A Google Workspace review, three agreed priority fixes and a plain-English action plan.',
+      '<b>Digital Shield:</b> $2,850 total, an estimated 10–14 business days. 2-Step Verification for everyone, access and sharing tidied, email spoofing protection and an onboarding and offboarding checklist.',
+      '<b>Pink Proxy Concierge:</b> custom quote, from $2,950. Everything in the Digital Shield plus additions scoped to your team.'
     ]);
   }
 
@@ -341,7 +341,7 @@ function sendAuditReply_(req) {
           '<div style="font-size:12.5px;color:#A8B4C8;margin-top:10px">Times show in your local time zone. If none work, just reply and suggest a time.</div>' +
         '</div>' +
         details +
-        p('<span style="font-size:13px;color:#5A6378"><b>No payment is needed for the call.</b> If you decide to go ahead, we\'ll confirm the package, scope and payment terms in writing first. One-time projects are paid 50% upfront before work begins and 50% when the agreed work is complete. Ongoing care is billed monthly.</span>') +
+        p('<span style="font-size:13px;color:#5A6378"><b>No payment is needed for the call.</b> If you decide to go ahead, we\'ll confirm the package, scope and payment terms in writing first. One-time projects are paid 50% upfront before work begins and 50% when the agreed work is complete. </span>') +
         p('<b>To make the call as useful as possible, it helps to have a rough list of:</b>') +
         '<ol style="margin:0 0 16px;padding-left:20px">' +
           '<li style="margin:0 0 6px">The apps your team uses day to day (email, payments, file storage, etc.)</li>' +

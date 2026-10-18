@@ -62,7 +62,7 @@
       scoreEl.textContent = yes + " of 10 in place";
       scoreEl.dataset.score = String(yes);
       var lead = yes === items.length
-        ? "Your answers suggest strong security habits. A free discovery call can help confirm nothing has been missed, and ongoing care can help keep it that way as your team grows."
+        ? "Your answers suggest strong security habits. A free discovery call can help confirm nothing has been missed, and scheduled access reviews can help keep it that way as your team grows."
         : "Your answers suggest areas worth reviewing. A free discovery call can help confirm the right package and next steps.";
       var unsureLine = unsure ? "<p>You marked " + unsure + (unsure === 1 ? " item" : " items") + " as Not sure. Those are worth checking too.</p>" : "";
       result.innerHTML = "<p><b>You answered Yes to " + yes + " of 10.</b> " + lead + "</p>" + unsureLine +

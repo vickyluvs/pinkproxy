@@ -65,3 +65,15 @@ Each version is a git tag; roll back one category with `git revert <tag>`.
 - Phone header: no longer sticky below 620px and more compact (155px → 95px at 320px), so it can't cover content. Anchor links leave room for the sticky header on desktop.
 - Forms: double-submit guard; Apps Script now limits each email to 3 submissions per 10 minutes for both forms (needs a new deployment version).
 - **Not tested here:** real iPhone Safari, enlarged system text, live form delivery and the Google Calendar booking page. Check these on your phone after publishing.
+
+## review-08: Google Workspace focus, undeliverable promises removed (Launch Playbook, Oct 18)
+- Site now says we specialize in Google Workspace account security and employee-access management; other systems are confirmed on the call.
+- Removed promises we can't deliver yet: router/Wi-Fi, remote wipe and device management, backups and test restores, laptop hardening, Microsoft 365, password manager rollout. Added these to "Not included".
+- Jumpstart: "Workspace Review & Priority Fixes", 3 fixes from an agreed list, email authentication observation only, record of changes and checks. Limits shown: up to 10 people, 1 Workspace domain.
+- Digital Shield: "Workspace Security & Access Setup", 2-Step Verification rolled out and checked, groups/sharing tidied, up to 5 connected apps reviewed, onboarding/offboarding checklist.
+- Concierge: "Workspace Governance & Team Readiness", custom quote from $2,950, additions chosen and priced in the proposal.
+- $450/month maintenance paused and replaced with "Ask about scheduled Workspace access reviews".
+- New FAQ: "Can't I do this myself with AI?" Homepage "What we cover" now lists five Google Workspace areas.
+- Footer disclaimer updated to the playbook's wording, plus "not affiliated with or endorsed by Google, NIST or CISA".
+- Apps Script auto-reply text updated to match (needs a new deployment version).
+- Jumpstart and Shield website prices unchanged; pilot clients are quoted the test prices ($995 / $1,950) privately.
