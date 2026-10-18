@@ -84,3 +84,8 @@ Each version is a git tag; roll back one category with `git revert <tag>`.
   - "Isn't Google Workspace already secure?" Google's small-business security checklist (admins set up redundant admins, phishing/spoofing protections, sharing permissions) and CISA's "minimum viable security configurations" for Google Workspace.
   - "We're too small to be hacked." NIST quotes ("The size of a business is never going to be a form of protection"; "a particularly ripe target"; "easy targets to get into bigger businesses through the supply chain") and two IBM 2025 figures (phishing 16%, the most common starting point; 241 days to identify and contain).
   - Every fact links to its source. Checked October 18, 2026.
+
+## review-10: No price in the hero, softer checklist wording
+- Homepage hero: the "$1,450 total project fee" box replaced with three reassurances: nothing changes without your approval; every change checked and explained; you keep ownership of your systems. Prices stay on the package cards and pricing page.
+- Free checklist PDF description no longer promises "a quick fix for every gap"; now "All 10 checks and why each one matters for your business."
+- Eyebrow labels on dark backgrounds back to the lighter rose gold for readability.
