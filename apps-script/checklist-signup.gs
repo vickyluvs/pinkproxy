@@ -35,6 +35,8 @@ const CONFIG = {
   // Where the script downloads the PDF to attach it. Uses the copy in your
   // GitHub repo because Cloudflare's bot protection blocks Google's servers
   // from downloading files off your website.
+  // Attaching a PDF from a new domain is a common spam signal. Leave false and send the link only.
+  ATTACH_PDF: false,
   PDF_ATTACHMENT_URL: 'https://raw.githubusercontent.com/vickyluvs/pinkproxy/main/assets/pink-proxy-5-minute-checklist.pdf',
 
   // Your business mailing address. US anti-spam law (CAN-SPAM) requires a
@@ -97,7 +99,8 @@ function doPost(e) {
     if (data.company_website) return json_({ success: true });
 
     const email = String(data.email || '').trim().toLowerCase();
-    const firstName = clean_(data.first_name).split(' ')[0];
+    const rawFirst = clean_(data.first_name).split(' ')[0];
+    const firstName = rawFirst ? rawFirst.charAt(0).toUpperCase() + rawFirst.slice(1) : '';
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return json_({ success: false, message: 'Please enter a valid email address.' });
     }
@@ -158,7 +161,7 @@ function sendChecklist_(to, firstName, score) {
         'The <span style="color:#F2A7BB">Pink</span> Proxy</div>' +
       '<div style="padding:28px;font-size:15px;line-height:1.6">' +
         '<p style="margin:0 0 16px">' + hi + '</p>' +
-        '<p style="margin:0 0 16px">Here is your copy of <b>The 5-Minute Cyber Hygiene Checklist</b>. It\'s attached as a PDF, and you can also open it here:</p>' +
+        '<p style="margin:0 0 16px">Here is your copy of <b>The 5-Minute Cyber Hygiene Checklist</b>. You can open or download it here:</p>' +
         '<p style="margin:0 0 20px"><a href="' + CONFIG.PDF_URL + '" style="display:inline-block;background:#E0A96D;color:#0A192F;font-weight:700;text-decoration:none;padding:12px 22px;border-radius:999px">Open the checklist</a></p>' +
         scoreLine +
         '<p style="margin:0 0 16px">Each item explains why it matters for your business. If you\'d like help putting things right, you can <a href="' + CONFIG.BOOKING_URL + '" style="color:#94591F">book a free 20-minute discovery call</a>, or just reply to this email.</p>' +
@@ -178,7 +181,7 @@ function sendChecklist_(to, firstName, score) {
   const from = senderOption_(CONFIG.FROM_EMAIL);
   if (from) options.from = from;
 
-  const pdf = fetchPdf_();
+  const pdf = CONFIG.ATTACH_PDF ? fetchPdf_() : null;
   if (pdf) options.attachments = [pdf];
 
   GmailApp.sendEmail(
