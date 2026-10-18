@@ -3,6 +3,11 @@
 Changes from the Developer Implementation Brief (October 17, 2026), one version per category.
 Each version is a git tag; roll back one category with `git revert <tag>`.
 
+## review-11 — Photos
+- Homepage "Is this for you?": added a "Built for owners like these" row of five stock photos (studios, cafés, designers, real estate, artists), labeled as illustrative stock images, not clients.
+- About "How we work": added a small-team photo beside the cards.
+- Images cropped to 4:5, compressed to WebP (~170 KB total), lazy-loaded, with alt text.
+
 ## review-01: Free discovery-call language and booking flow (P0: G01, G02, F01, F02)
 - One name for the first step everywhere: "Book a Free 20-Minute Call" (calendar) and "Request My Free Discovery Call" (form). Nav button is now "Book a Free Call".
 - Shared booking section rewritten: free-call eyebrow and headline, booking button first, "No payment is required to book", 50/50 payment terms.
