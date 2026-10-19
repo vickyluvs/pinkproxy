@@ -504,3 +504,7 @@ footer .wrap{padding-block:56px 40px;display:grid;gap:36px}
 .h1-kicker{display:flex;align-items:center;gap:12px;width:fit-content;margin-bottom:18px;padding:8px 18px 8px 12px;border-radius:999px;background:rgba(242,167,187,.12);border:1px solid rgba(242,167,187,.45);color:var(--pink);font-size:clamp(20px,2.3vw,28px);font-weight:800;letter-spacing:-.01em;line-height:1.2}
 .h1-kicker::before{content:"";flex:none;width:1.1em;height:1.1em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F2A7BB' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z'/%3E%3Cpath d='M9 12l2 2 4-4'/%3E%3C/svg%3E") center/contain no-repeat}
 .f-tm{margin-top:10px;font-size:12px;opacity:.75}
+/* review-13: bluer navy backgrounds (brand Navy -> Light Navy), glow without gray cast */
+.hero{background:linear-gradient(135deg,#0A192F 0%,#102446 55%,#13294A 100%)}
+.hero::before{background:radial-gradient(50% 70% at 95% 5%,rgba(242,167,187,.10),transparent 60%),radial-gradient(40% 60% at 0% 100%,rgba(59,104,170,.18),transparent 70%)}
+.band.navy{background:linear-gradient(135deg,#0A192F 0%,#13294A 100%)}

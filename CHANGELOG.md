@@ -3,6 +3,9 @@
 Changes from the Developer Implementation Brief (October 17, 2026), one version per category.
 Each version is a git tag; roll back one category with `git revert <tag>`.
 
+## review-13 — Bluer navy
+- Hero and navy bands now blend brand Navy (#0A192F) into Light Navy (#13294A); removed the rose-gold corner glow that read as gray/black.
+
 ## review-12 — Workspace prominence & SEO
 - Hero: "Google Workspace Security" is now a large pink badge inside the H1; the eyebrow names the audience.
 - Services H1 now names Google Workspace.
