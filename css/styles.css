@@ -508,3 +508,5 @@ footer .wrap{padding-block:56px 40px;display:grid;gap:36px}
 .hero{background:linear-gradient(135deg,#0A192F 0%,#102446 55%,#13294A 100%)}
 .hero::before{background:radial-gradient(50% 70% at 95% 5%,rgba(242,167,187,.10),transparent 60%),radial-gradient(40% 60% at 0% 100%,rgba(59,104,170,.18),transparent 70%)}
 .band.navy{background:linear-gradient(135deg,#0A192F 0%,#13294A 100%)}
+/* review-14: Jumpstart upgrade credit note */
+.tier .credit-line{margin-top:8px;font-size:13px;line-height:1.45;color:var(--navy-ink);background:var(--blush);border-radius:8px;padding:8px 10px}

@@ -3,6 +3,10 @@
 Changes from the Developer Implementation Brief (October 17, 2026), one version per category.
 Each version is a git tag; roll back one category with `git revert <tag>`.
 
+## review-14 — Upgrade credit terms
+- Jumpstart card: note that the $1,450 is credited toward the Digital Shield or Concierge if the client upgrades within 30 days.
+- FAQ: upgrade credit changed from "any higher package within 60 days" to 30 days from the final Jumpstart payment, with an example.
+
 ## review-13 — Bluer navy
 - Hero and navy bands now blend brand Navy (#0A192F) into Light Navy (#13294A); removed the rose-gold corner glow that read as gray/black.
 
