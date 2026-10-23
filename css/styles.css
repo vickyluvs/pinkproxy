@@ -510,3 +510,8 @@ footer .wrap{padding-block:56px 40px;display:grid;gap:36px}
 .band.navy{background:linear-gradient(135deg,#0A192F 0%,#13294A 100%)}
 /* review-14: Jumpstart upgrade credit note */
 .tier .credit-line{margin-top:8px;font-size:13px;line-height:1.45;color:var(--navy-ink);background:var(--blush);border-radius:8px;padding:8px 10px}
+/* review-15: founder photo */
+.headshot{width:112px;height:112px;border-radius:50%;object-fit:cover;border:3px solid var(--copper);display:block}
+.founder-card .founder-photo{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:14px;border:3px solid var(--copper);display:block}
+@media (max-width:600px){.headshot{width:88px;height:88px}}
+@media (max-width:860px){.founder-card .founder-photo{width:96px;height:96px;aspect-ratio:1;border-radius:50%;object-position:50% 22%}}

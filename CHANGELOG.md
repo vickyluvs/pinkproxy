@@ -3,6 +3,10 @@
 Changes from the Developer Implementation Brief (October 17, 2026), one version per category.
 Each version is a git tag; roll back one category with `git revert <tag>`.
 
+## review-15 — Founder photo
+- Replaced the "VS" initials with Victoria's photo: round headshot on the homepage, portrait in the About founder card (round on mobile).
+- Founder photo added to the homepage structured data.
+
 ## review-14 — Upgrade credit terms
 - Jumpstart card: note that the $1,450 is credited toward the Digital Shield or Concierge if the client upgrades within 30 days.
 - FAQ: upgrade credit changed from "any higher package within 60 days" to 30 days from the final Jumpstart payment, with an example.
