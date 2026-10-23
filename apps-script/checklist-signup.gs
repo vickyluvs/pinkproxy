@@ -124,6 +124,7 @@ function doPost(e) {
 
     sendChecklist_(email, firstName, data.score);
     if (CONFIG.NOTIFY_EMAIL && !isRepeat) notifyOwner_(email, firstName, data.score);
+    addToCrm_('checklist', { name: firstName, email: email, score: data.score });
 
     return json_({ success: true });
   } catch (err) {
@@ -297,6 +298,7 @@ function handleAudit_(data) {
 
   sendAuditReply_(req);
   if (CONFIG.AUDIT_NOTIFY_EMAIL) notifyAudit_(req);
+  addToCrm_('audit', req);
   return json_({ success: true });
 }
 
@@ -394,6 +396,15 @@ function getAuditSheet_() {
     sheet.getRange('A1:J1').setFontWeight('bold');
   }
   return sheet;
+}
+
+/** Adds the lead to the CRM tabs if crm.gs is installed. Never breaks the form. */
+function addToCrm_(kind, info) {
+  try {
+    if (typeof crmAddLead_ === 'function') crmAddLead_(kind, info);
+  } catch (err) {
+    console.error('CRM update failed: ' + err);
+  }
 }
 
 function parseBody_(e) {
