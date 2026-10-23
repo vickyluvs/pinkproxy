@@ -207,7 +207,7 @@ function crmDailyDigest() {
   const rechecks = jv.filter(function (r) { return r[0] && !r[CRM.J.recheckDone - 1] && soon(r[CRM.J.recheck - 1], 7); })
     .map(function (r) { return r[1] + ': 90-day re-check due ' + fmt(r[CRM.J.recheck - 1]) + '. Send the re-check email.'; });
   const offers = jv.filter(function (r) { return r[0] && soon(r[CRM.J.creditUntil - 1], 5); })
-    .map(function (r) { return r[1] + ': Jumpstart credit toward Digital Shield ends ' + fmt(r[CRM.J.creditUntil - 1]) + '.'; });
+    .map(function (r) { return r[1] + ': Jumpstart upgrade credit (Shield or Concierge) ends ' + fmt(r[CRM.J.creditUntil - 1]) + '.'; });
   if (rechecks.length) sections.push(['Re-checks', rechecks]);
   if (offers.length) sections.push(['Upgrade offers ending soon', offers]);
 
